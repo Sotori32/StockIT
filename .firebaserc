@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "stock-it-6d205": {
+      "hosting": {
+        "stock-it": [
+          "stock-it-6d205"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "stock-it-6d205"
+  }
+}
