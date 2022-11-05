@@ -112,5 +112,7 @@
       }
     }
   },
-  "defaultProject": "stock-it"
+  "cli": {
+    "analytics": false
+  }
 }
