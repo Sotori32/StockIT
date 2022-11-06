@@ -19,12 +19,14 @@ import { MatInputModule } from '@angular/material/input';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './services/auth.guard';
+import { StorageComponent } from './components/storage/storage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    StorageComponent
   ],
   imports: [
     BrowserModule,

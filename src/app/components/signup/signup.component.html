@@ -1,1 +1,18 @@
-<p>signup works!</p>
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm.value)">
+    <mat-form-field appearance="fill">
+        <mat-label>Enter your name</mat-label>
+        <input matInput placeholder = "John Dough" formControlName = "name" required>
+        <mat-error *ngIf="this.signupForm.get('name')?.invalid">{{getErrorMessageName()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder = "pat@example.com" formControlName = "email" required>
+        <mat-error *ngIf="this.signupForm.get('email')?.invalid">{{getErrorMessageEmail()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Enter a password</mat-label>
+        <input matInput placeholder = "Jelszó" formControlName = "password" required>
+        <mat-error *ngIf="this.signupForm.get('password')?.invalid">{{getErrorMessagePassword()}}</mat-error>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="accent" [disabled]="!signupForm.valid">Küldés</button>
+</form>

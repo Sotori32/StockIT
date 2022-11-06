@@ -1,15 +1,13 @@
-
-<p>
-    <mat-form-field appearance="fill" class="form">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+    <mat-form-field appearance="fill">
         <mat-label>Enter your email</mat-label>
-        <input matInput placeholder="pat@example.com" [formControl]="email" required>
-        <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+        <input matInput placeholder = "pat@example.com" formControlName = "email" required>
+        <mat-error *ngIf="this.loginForm.get('email')?.invalid">{{getErrorMessageEmail()}}</mat-error>
     </mat-form-field>
-</p>
-<p>
-    <mat-form-field>
+    <mat-form-field appearance="fill">
         <mat-label>Enter a password</mat-label>
-        <input matInput placeholder="pat@example.com" [formControl]="password" required>
-        <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
+        <input matInput placeholder = "Jelszó" formControlName = "password" required>
+        <mat-error *ngIf="this.loginForm.get('password')?.invalid">{{getErrorMessagePassword()}}</mat-error>
     </mat-form-field>
-</p>
+    <button type="submit" mat-raised-button color="accent" [disabled]="!loginForm.valid">Küldés</button>
+</form>
