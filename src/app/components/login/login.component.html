@@ -1,13 +1,27 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
-    <mat-form-field appearance="fill">
-        <mat-label>Enter your email</mat-label>
-        <input matInput placeholder = "pat@example.com" formControlName = "email" required>
-        <mat-error *ngIf="this.loginForm.get('email')?.invalid">{{getErrorMessageEmail()}}</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Enter a password</mat-label>
-        <input matInput placeholder = "Jelszó" formControlName = "password" required>
-        <mat-error *ngIf="this.loginForm.get('password')?.invalid">{{getErrorMessagePassword()}}</mat-error>
-    </mat-form-field>
-    <button type="submit" mat-raised-button color="accent" [disabled]="!loginForm.valid">Küldés</button>
-</form>
+<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+        <mat-card-header>
+            <mat-card-title>StockIT Raktárkezelő</mat-card-title>
+            <mat-card-subtitle>Bejelentkezés</mat-card-subtitle>
+        </mat-card-header>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" class="form">
+            <mat-card-content>
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Email cím:</mat-label>
+                    <input matInput placeholder = "minta@email.com" formControlName = "email" required>
+                    <mat-error *ngIf="this.loginForm.get('email')?.invalid">{{getErrorMessageEmail()}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Jelszó:</mat-label>
+                    <input matInput placeholder = "******" formControlName = "password" [type]="hide ? 'password' : 'text'" required>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="this.loginForm.get('password')?.invalid">{{getErrorMessagePassword()}}</mat-error>
+                </mat-form-field>
+            </mat-card-content>
+            <button type="submit" mat-raised-button color="accent" class="btn-block" [disabled]="!loginForm.valid">Bejelentkezés</button>
+        </form>
+        <button mat-raised-button color="basic" class="btn-block" (click)="goToPage('/signup');">Regisztráció</button>
+    </mat-card>
+</div>

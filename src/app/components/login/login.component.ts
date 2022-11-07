@@ -12,7 +12,10 @@ import { LoginService } from 'src/app/services/login/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
+
   private subs: Subscription = new Subscription();
+
+  hide = true;
 
   constructor(private loginService: LoginService, private auth: AngularFireAuth, private router: Router) {
   }
@@ -29,24 +32,20 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)])
+    password: new FormControl('', [Validators.required])
   })
 
   getErrorMessageEmail() {
     if (this.loginForm.get('email')?.hasError('required')) {
-      return 'You must enter a value';
+      return 'Adja meg az email címét.';
     }
 
-      return this.loginForm.get('email')?.hasError('email') ? 'Not a valid email' : '';
+      return this.loginForm.get('email')?.hasError('email') ? 'Nem helyes formátum.' : '';
   }
 
   getErrorMessagePassword() {
     if (this.loginForm.get('password')?.hasError('required')) {
-      return 'You must enter a password';
-    }
-
-    if (this.loginForm.get('password')?.hasError('minlength')) {
-      return 'Minimum required length is 8'
+      return 'Adja meg a jelszavát.';
     }
 
     return this.loginForm.get('password')?.errors ? 'invalid' : '';
@@ -54,5 +53,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit(value: Partial<{ email: string | null; password: string | null; }>) {
     this.loginService.login(value.email ?? "", value.password ?? "");   
+  }
+
+  goToPage(pageName: string){
+    this.router.navigate([`${pageName}`]);
   }
 }

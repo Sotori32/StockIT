@@ -63,4 +63,8 @@ export class SignupComponent implements OnInit {
   onSubmit(value: Partial<{ name: string | null, email: string | null, password: string | null }>) {
     this.loginService.register(value.name ?? "", value.email ?? "", value.password ?? "");   
   }
+
+  goToPage(pageName: string){
+    this.router.navigate([`${pageName}`]);
+  }
 }
