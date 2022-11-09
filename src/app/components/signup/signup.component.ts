@@ -13,6 +13,8 @@ import { LoginService } from 'src/app/services/login/login.service';
 export class SignupComponent implements OnInit {
   private subs: Subscription = new Subscription();
 
+  hide = true;
+
   constructor(private loginService: LoginService, private auth: AngularFireAuth, private router: Router) {
   }
   

@@ -93,6 +93,11 @@
 	padding: 45px 70px 55px;
 }
 
+.main-wrapper .star-fill {
+	font-size: 12px;
+	text-align: end;
+}
+
 .main-wrapper .mat-raised-button {
 	margin: 10px 0 10px 0;
 }

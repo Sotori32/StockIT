@@ -1,19 +1,33 @@
-<form [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm.value)">
-    <mat-form-field appearance="fill">
-        <mat-label>Enter your name</mat-label>
-        <input matInput placeholder = "John Dough" formControlName = "name" required>
-        <mat-error *ngIf="this.signupForm.get('name')?.invalid">{{getErrorMessageName()}}</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Enter your email</mat-label>
-        <input matInput placeholder = "pat@example.com" formControlName = "email" required>
-        <mat-error *ngIf="this.signupForm.get('email')?.invalid">{{getErrorMessageEmail()}}</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Enter a password</mat-label>
-        <input matInput placeholder = "Jelszó" formControlName = "password" required>
-        <mat-error *ngIf="this.signupForm.get('password')?.invalid">{{getErrorMessagePassword()}}</mat-error>
-    </mat-form-field>
-    <button type="submit" mat-raised-button color="accent" [disabled]="!signupForm.valid">Küldés</button>
-</form>
-<button mat-raised-button color="basic" (click)="goToPage('/login');">Bejelentkezés</button>
+<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+        <mat-card-header>
+            <mat-card-title>StockIT Raktárkezelő</mat-card-title>
+            <mat-card-subtitle>Regisztráció</mat-card-subtitle>
+        </mat-card-header>
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm.value)" class="form">
+            <mat-card-content>
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Név:</mat-label>
+                    <input matInput placeholder = "Minta Pál" formControlName = "name" required>
+                    <mat-error *ngIf="this.signupForm.get('name')?.invalid">{{getErrorMessageName()}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Email cím:</mat-label>
+                    <input matInput placeholder = "minta@email.com" formControlName = "email" required>
+                    <mat-error *ngIf="this.signupForm.get('email')?.invalid">{{getErrorMessageEmail()}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Jelszó:</mat-label>
+                    <input matInput placeholder = "******" formControlName = "password" [type]="hide ? 'password' : 'text'" required>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="this.signupForm.get('password')?.invalid">{{getErrorMessagePassword()}}</mat-error>
+                </mat-form-field>
+                <p class="star-fill">A csillaggal (*) jelölt mezők kitöltése kötelező.</p>
+            </mat-card-content>
+            <button type="submit" mat-raised-button color="primary" class="btn-block" [disabled]="!signupForm.valid">Küldés</button>
+        </form>
+        <button mat-raised-button color="basic" class="btn-block" (click)="goToPage('/login');">Bejelentkezés</button>
+    </mat-card>
+</div>
