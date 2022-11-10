@@ -1,7 +1,9 @@
 ::ng-deep .main-wrapper {
 	min-height: 100vh;
 	font-family: 'Roboto', sans-serif;
-    background-color: black;
+    background: url('src\assets\george-kedenburg-iii-8lXmsn4rxEY-unsplash.jpg') no-repeat;
+	background-size: cover;
+	opacity: 0.9;
 }
 
 .main-wrapper {
@@ -54,8 +56,7 @@
 	width: 100%;
 }
 
-.main-wrapper .form-field,
-.main-wrapper .btn-block {
+.main-wrapper :where(.form-field, .btn-block) {
 	width: 100%;
 }
 
