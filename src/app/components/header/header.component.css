@@ -1,0 +1,45 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+mat-toolbar-row .label {
+    margin-left: 15px;
+}
+
+mat-toolbar-row .title {
+    margin-left: 0;
+    font-weight: 700;
+    font-size: xx-large;
+}
+
+.title-stock {
+    color: #fff;
+}
+
+.title-it {
+    color: #3f51b5;
+    background-color: #fff;
+    padding: 0 0.2em 0 0.2em;
+}
+
+.title a {
+    text-decoration: none;
+}
+
+.label a:link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.label a:visited {
+    color: #fff;
+    text-decoration: none;
+}
+.label a:hover {
+    color: rgb(194, 194, 194);
+    text-decoration: none;
+}
+.label a:active {
+    color: #fff;
+    text-decoration: none;
+}
