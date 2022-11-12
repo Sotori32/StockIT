@@ -1,13 +1,9 @@
-::ng-deep .main-wrapper {
+.main-wrapper {
+	height: 100%;
 	min-height: 100vh;
-	font-family: 'Roboto', sans-serif;
     background: url('src\assets\george-kedenburg-iii-8lXmsn4rxEY-unsplash.jpg') no-repeat;
 	background-size: cover;
 	opacity: 0.9;
-}
-
-.main-wrapper {
-	height: 100%;
 }
 
 .box {

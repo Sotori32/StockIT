@@ -24,4 +24,8 @@ export class LoginService {
       } as UserModel)
     });
   }
+
+  public logout() {
+    this.auth.signOut()
+  }
 }

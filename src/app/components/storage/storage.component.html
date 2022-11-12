@@ -1,4 +1,13 @@
-<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center start">
+<app-header></app-header>
+<div class="main-wrapper" fxLayout="column" fxLayoutAlign="center start">
+    <mat-card class="box">
+        <mat-card-content>
+            <mat-form-field appearance="standard">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+              </mat-form-field>
+        </mat-card-content>
+    </mat-card>
     <mat-card class="box">
         <table mat-table [dataSource]="displayDataSource">
             <mat-card-content>
@@ -29,6 +38,10 @@
             
                 <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
             </mat-card-content>
         </table>
     </mat-card>

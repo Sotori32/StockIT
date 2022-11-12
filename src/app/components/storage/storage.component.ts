@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-storage',
@@ -16,7 +17,12 @@ export class StorageComponent implements OnInit {
     'weight',
     'symbol'
   ];
-  displayDataSource = ELEMENT_DATA;
+  displayDataSource = new MatTableDataSource(ELEMENT_DATA);
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.displayDataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   constructor() { }
 

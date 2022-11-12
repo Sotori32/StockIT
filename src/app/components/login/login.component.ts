@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(value: Partial<{ email: string | null; password: string | null; }>) {
-    this.loginService.login(value.email ?? "", value.password ?? "");   
+    this.loginService.login(value.email ?? "", value.password ?? "");
   }
 
   goToPage(pageName: string){
