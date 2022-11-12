@@ -4,6 +4,8 @@ export interface ManufacturerModel {
     name: string
 }
 
+export const ManufacturerCollectionPath = "Manufacturer"
+
 export const manufacturerConverter: FirestoreDataConverter<ManufacturerModel> = {
     toFirestore: function (category: WithFieldValue<ManufacturerModel>): DocumentData {
         return {name: category.name}

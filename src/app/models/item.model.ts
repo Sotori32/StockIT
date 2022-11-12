@@ -1,21 +1,23 @@
-import { DocumentData, DocumentReference, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions, WithFieldValue } from 'firebase/firestore'
+import { DocumentReference } from '@angular/fire/compat/firestore';
+import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions, WithFieldValue } from 'firebase/firestore'
 import { CategoryModel } from './category.model';
 import { ManufacturerModel } from './manufacturer.model';
 import { WarehouseModel } from './warehouse.model';
 
 export interface ItemModel {
     name: string,
-    summary: string,
+    summary?: string,
     purchasePrice: number,
     quantity: number,
     sellingPrice: number,
-    category: DocumentReference<CategoryModel>,
-    manufacturer: DocumentReference<ManufacturerModel>,
+    category: DocumentReference<CategoryModel>[],
+    manufacturer?: DocumentReference<ManufacturerModel>,
     warehouse: DocumentReference<WarehouseModel>
     upc: string,
     sku: string,
 }
 
+export const ItemModelPath = "Items"
 
 export const itemConverter: FirestoreDataConverter<ItemModel> = {
     toFirestore: function (item: WithFieldValue<ItemModel>): DocumentData {

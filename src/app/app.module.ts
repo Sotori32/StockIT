@@ -21,6 +21,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
+import {MatDialogModule} from '@angular/material/dialog';
+import {matSelectAnimations, MatSelectModule} from '@angular/material/select';
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -29,6 +31,7 @@ import { AuthGuard } from './services/auth.guard';
 import { StorageComponent } from './components/storage/storage.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AddItemComponent } from './components/storage/add-item/add-item.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,8 @@ import { FooterComponent } from './components/footer/footer.component';
     LoginComponent,
     StorageComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    AddItemComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +65,8 @@ import { FooterComponent } from './components/footer/footer.component';
     MatTableModule,
     MatToolbarModule,
     MatDividerModule,
+    MatDialogModule,
+    MatSelectModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

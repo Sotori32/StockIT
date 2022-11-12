@@ -1,4 +1,5 @@
-import { DocumentData, DocumentReference, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions, WithFieldValue } from "firebase/firestore";
+import { DocumentReference } from "@angular/fire/compat/firestore";
+import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions, WithFieldValue } from "firebase/firestore";
 import { UserModel } from "./user.model";
 
 export interface WarehouseModel {
