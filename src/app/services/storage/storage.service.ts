@@ -18,34 +18,37 @@ export class StorageService {
 
   public getAllWarehouses() {
     return this.auth.user.pipe(filter((user) => !!user), mergeMap(user => {
-      return from(this.store.collection<WarehouseModel>('Warehouses').ref.where('userCanRead', "array-contains", user!.uid).get())
+      return this.store.collection<WarehouseModel>('Warehouses', ref => ref.where('userCanRead', "array-contains", user!.uid)).snapshotChanges()
     }))
   }
 
   public getWarehouseByRef(ref: DocumentReference<WarehouseModel>) {
-    return this.store.doc<WarehouseModel>(ref.path).valueChanges()
+    return this.store.doc<WarehouseModel>(ref.path).get()
   }
 
   public getCategoriesByRef(refs: DocumentReference<CategoryModel>[]) {
-    return combineLatest(refs.map(ref => this.store.doc<CategoryModel>(ref.path).valueChanges()))
+    if (refs.length === 0) {
+      return of([])
+    }
+    return combineLatest(refs.map(ref => this.store.doc<CategoryModel>(ref.path).get()))
   }
 
   public getManufacturerByRef(ref: DocumentReference<ManufacturerModel>) {
-    return this.store.doc<CategoryModel>(ref.path).valueChanges()
+    return this.store.doc<ManufacturerModel>(ref.path).get()
   }
 
   public getAllItems() {
     return this.getAllWarehouses().pipe(
       mergeMap(warehouses => {
-        return combineLatest(warehouses.docs.map(warehouse => { return from(this.store.collection<ItemModel>('Items').ref.where('warehouse', '==', warehouse.ref).get()) }))
+        return combineLatest(warehouses.map(warehouse => { return from(this.store.collection<ItemModel>('Items', ref => ref.where('warehouse', '==', warehouse.payload.doc.ref)).snapshotChanges()) }))
       }),
       mergeMap(itemsByWarehouse => {
-        return combineLatest(itemsByWarehouse.flatMap(items => items.docs.map(item => item.data()))
+        return combineLatest(itemsByWarehouse.flatMap(items => items.map(item => {return {data: item.payload.doc.data(), id: item.payload.doc.id}}))
           .map(item => {
             return zip(of(item), 
-            this.getWarehouseByRef(item.warehouse), 
-            item.category ? this.getCategoriesByRef(item.category) : of(undefined), 
-            item.manufacturer ?  this.getManufacturerByRef(item.manufacturer) : of(undefined))
+            this.getWarehouseByRef(item.data.warehouse), 
+            this.getCategoriesByRef(item.data.category), 
+            item.data.manufacturer ?  this.getManufacturerByRef(item.data.manufacturer) : of(undefined))
           }))
       }))
   }

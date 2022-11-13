@@ -13,28 +13,15 @@ export class ItemService {
 
   constructor(private store: AngularFirestore) { }
 
-  public addItem(
-    name: string,
-    sku: string,
-    upc: string,
-    summary: string | undefined,
-    category: DocumentReference<CategoryModel>[],
-    manufacturer: DocumentReference<ManufacturerModel> | undefined,
-    warehouse: DocumentReference<WarehouseModel>,
-    purchasePrice: number,
-    sellingPrice: number,
-    quantity: number) {
-    this.store.collection<ItemModel>(ItemCollectionPath).add(
-      { name, 
-        category,
-        manufacturer: manufacturer ?? undefined,
-        purchasePrice, 
-        quantity, 
-        sellingPrice, 
-        sku, 
-        summary: summary ?? undefined, 
-        upc, 
-        warehouse 
-      })
+  public addItem(item: ItemModel) {
+    this.store.collection<ItemModel>(ItemCollectionPath).add(item)
   }
+
+  public deleteItem(id: string){
+    this.store.doc<ItemModel>(ItemCollectionPath + "/" + id).delete()
+  }
+
+  public editItem(id: string, item: ItemModel) {
+    this.store.doc<ItemModel>(ItemCollectionPath + "/" + id).update(item)
+  }  
 }

@@ -4,12 +4,18 @@ import { AuthGuard } from './services/auth.guard';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component'
 import { StorageComponent } from './components/storage/storage.component';
+import { WarehousesComponent } from './components/warehouses/warehouses.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { ManufacturersComponent } from './components/manufacturers/manufacturers.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/storage', pathMatch: 'full' },
-  { path: 'storage', title: 'Storage | StockIT', component: StorageComponent, canActivate: [AuthGuard]},
-  { path: 'login', title: 'Log into your account | StockIT', component: LoginComponent },
-  { path: 'signup', title: 'Sign up and create your account | StockIT', component: SignupComponent },
+  { path: 'storage', title: 'Irányítópult | StockIT', component: StorageComponent, canActivate: [AuthGuard]},
+  { path: 'login', title: 'Bejelentkezés | StockIT', component: LoginComponent },
+  { path: 'signup', title: 'Regisztráció | StockIT', component: SignupComponent },
+  { path: 'warehouses', title: 'Raktárak | StockIT', component: WarehousesComponent, canActivate: [AuthGuard]},
+  { path: 'categories', title: 'Kategóriák | StockIT', component: CategoriesComponent, canActivate: [AuthGuard]},
+  { path: 'manufacturers', title: 'Gyártók | StockIT', component: ManufacturersComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

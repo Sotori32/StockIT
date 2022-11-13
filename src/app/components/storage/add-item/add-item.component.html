@@ -24,8 +24,8 @@
     <mat-form-field appearance="standard" class="form-field">
       <mat-label>Kategória:</mat-label>
       <mat-select formControlName="category" multiple>
-        <mat-option *ngFor="let category of categories" [value]="{name: category.name, ref: category.ref}">
-          {{category.name}}
+        <mat-option *ngFor="let category of categories" [value]="category[0]">
+          {{category[1].name}}
         </mat-option>
       </mat-select>
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
@@ -35,8 +35,8 @@
       <mat-select formControlName="manufacturer">
         <mat-option>--</mat-option>
         <mat-option *ngFor="let manufacturer of manufacturers"
-          [value]="{name: manufacturer.name, ref: manufacturer.ref}">
-          {{manufacturer.name}}
+          [value]="manufacturer[0]">
+          {{manufacturer[1].name}}
         </mat-option>
       </mat-select>
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
@@ -45,8 +45,8 @@
       <mat-label>Raktár:</mat-label>
       <mat-select formControlName="warehouse" required>
         <mat-option>--</mat-option>
-        <mat-option *ngFor="let warehouse of warehouses" [value]="{name: warehouse.name, ref: warehouse.ref}">
-          {{warehouse.name}}
+        <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse[0]">
+          {{warehouse[1].name}}
         </mat-option>
       </mat-select>
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
@@ -69,6 +69,7 @@
   </div>
   <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Mégse</button>
-    <button type="submit" mat-button cdkFocusInitial [disabled]="!addItemForm.valid">Hozzáadás</button>
+    <button type="submit" mat-button cdkFocusInitial mat-dialog-close [disabled]="!addItemForm.valid" *ngIf="!isEditing">Hozzáadás</button>
+    <button type="submit" mat-button cdkFocusInitial mat-dialog-close [disabled]="!addItemForm.valid" *ngIf="isEditing">Szerkesztés</button>
   </div>
 </form>

@@ -21,8 +21,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
-import {MatDialogModule} from '@angular/material/dialog';
-import {matSelectAnimations, MatSelectModule} from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { matSelectAnimations, MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -32,6 +33,9 @@ import { StorageComponent } from './components/storage/storage.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AddItemComponent } from './components/storage/add-item/add-item.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { ManufacturersComponent } from './components/manufacturers/manufacturers.component';
+import { WarehousesComponent } from './components/warehouses/warehouses.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,10 @@ import { AddItemComponent } from './components/storage/add-item/add-item.compone
     StorageComponent,
     HeaderComponent,
     FooterComponent,
-    AddItemComponent
+    AddItemComponent,
+    CategoriesComponent,
+    ManufacturersComponent,
+    WarehousesComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +74,7 @@ import { AddItemComponent } from './components/storage/add-item/add-item.compone
     MatDividerModule,
     MatDialogModule,
     MatSelectModule,
+    MatMenuModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

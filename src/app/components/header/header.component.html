@@ -3,7 +3,12 @@
       <span class="title"><nav><a routerLink="" routerLinkActive="active" ariaCurrentWhenActive="page"><span class="title-stock">Stock</span><span class="title-it">IT</span></a></nav></span>
       <span class="spacer"></span>
       <span class="label"><nav><a routerLink="" routerLinkActive="active" ariaCurrentWhenActive="page">Felhasználói fiók</a></nav></span>
-      <span class="label"><nav><a routerLink="" routerLinkActive="active" ariaCurrentWhenActive="page">Beállítások</a></nav></span>
+      <button mat-button class="label" [matMenuTriggerFor]="settings">Beállítások</button>
+      <mat-menu #settings="matMenu">
+        <button mat-menu-item (click)="goToPage('/warehouses')">Raktárak</button>
+        <button mat-menu-item (click)="goToPage('/categories')">Kategóriák</button>
+        <button mat-menu-item (click)="goToPage('/manufacturers')">Gyártók</button>
+      </mat-menu>
       <span class="label" (click)="logout()"><nav><a routerLink="" routerLinkActive="active" ariaCurrentWhenActive="page">Kijelentkezés</a></nav></span>
     </mat-toolbar-row>
   </mat-toolbar>
