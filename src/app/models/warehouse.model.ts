@@ -4,13 +4,22 @@ import { UserModel } from "./user.model";
 
 export interface WarehouseModel {
     name: string,
-    address: string,
-    place: string,
-    postcode: string,
-    userCanRead: DocumentReference<UserModel>[],
-    userCanWrite: DocumentReference<UserModel>[]
+    address: string | null,
+    place: string | null,
+    postcode: string | null,
+    userCanRead: string[],
+    userCanWrite: string[]
 }
 
+export const WarehouseCollectionPath = "Warehouses"
+
+export interface WarehouseDisplayModel {
+    id: string,
+    name: string,
+    address?: string,
+    place?: string,
+    postcode?: string
+}
 
 export const warehouseConverter: FirestoreDataConverter<WarehouseModel> = {
     toFirestore: function (warehouse: WithFieldValue<WarehouseModel>): DocumentData {

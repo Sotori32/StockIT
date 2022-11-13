@@ -4,6 +4,8 @@ export interface CategoryModel {
     name: string
 }
 
+export const CategoryCollectionPath = "Categories"
+
 export const categoryConverter: FirestoreDataConverter<CategoryModel> = {
     toFirestore: function (category: WithFieldValue<CategoryModel>): DocumentData {
         return {name: category.name}
@@ -12,4 +14,9 @@ export const categoryConverter: FirestoreDataConverter<CategoryModel> = {
         const data = snapshot.data(options);
         return {name: data['name']} 
     }
+}
+
+export interface CategoryDisplayModel {
+    name: string,
+    id: string
 }

@@ -34,12 +34,11 @@ export class AddItemComponent implements OnInit, OnDestroy {
   private sub = new Subscription()
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: ItemDisplayModel | null,
+    @Inject(MAT_DIALOG_DATA) public data: ItemDisplayModel | undefined,
     private itemService: ItemService,
     private categoryService: CategoryService,
     private manufacturerService: ManufacturerService,
     private warehouseService: WarehouseService) {
-    debugger;
     this.selectedCategories = this.isEditing && this.data ? this.data.categories.map(c => c.id) : []
   }
 
@@ -91,9 +90,6 @@ export class AddItemComponent implements OnInit, OnDestroy {
     this.selectableCategories.forEach((c, key) => {
       categories.push([key, c])
     })
-    if (categories.length != 0) {
-      debugger;
-    }
     return categories
   }
 
@@ -135,7 +131,7 @@ export class AddItemComponent implements OnInit, OnDestroy {
       this.itemService.editItem(this.data!.id, item)
       return
     }
-    debugger;
+    
     this.itemService.addItem(item)
   }
 

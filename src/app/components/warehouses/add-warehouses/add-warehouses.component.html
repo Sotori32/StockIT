@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Raktár hozzáadása</h1>
+<form [formGroup]="addWarehouseForm" (ngSubmit)="onSubmit(addWarehouseForm.value)" class="form">
+  <div mat-dialog-content>
+    <mat-form-field appearance="standard" class="form-field">
+      <mat-label>Név</mat-label>
+      <input matInput formControlName="name" required>
+      <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
+    </mat-form-field>
+    <mat-form-field appearance="standard" class="form-field">
+        <mat-label>Cím</mat-label>
+        <input matInput formControlName="address">
+        <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
+      </mat-form-field>
+      <mat-form-field appearance="standard" class="form-field">
+        <mat-label>Helység</mat-label>
+        <input matInput formControlName="place">
+        <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
+      </mat-form-field>
+      <mat-form-field appearance="standard" class="form-field">
+        <mat-label>Irányítószám</mat-label>
+        <input matInput formControlName="postcode">
+        <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
+      </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Mégse</button>
+    <button type="submit" mat-button cdkFocusInitial mat-dialog-close [disabled]="!addWarehouseForm.valid" *ngIf="!isEditing">Hozzáadás</button>
+    <button type="submit" mat-button cdkFocusInitial mat-dialog-close [disabled]="!addWarehouseForm.valid" *ngIf="isEditing">Szerkesztés</button>
+  </div>
+</form>

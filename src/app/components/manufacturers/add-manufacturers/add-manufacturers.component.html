@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Gyártó hozzáadása</h1>
+<form [formGroup]="addManufacturerForm" (ngSubmit)="onSubmit(addManufacturerForm.value)" class="form">
+  <div mat-dialog-content>
+    <mat-form-field appearance="standard" class="form-field">
+      <mat-label>Gyártó neve:</mat-label>
+      <input matInput placeholder="Terméknév" formControlName="name" required>
+      <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Mégse</button>
+    <button type="submit" mat-button cdkFocusInitial mat-dialog-close [disabled]="!addManufacturerForm.valid" *ngIf="!isEditing">Hozzáadás</button>
+    <button type="submit" mat-button cdkFocusInitial mat-dialog-close [disabled]="!addManufacturerForm.valid" *ngIf="isEditing">Szerkesztés</button>
+  </div>
+</form>

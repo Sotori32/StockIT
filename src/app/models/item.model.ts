@@ -17,7 +17,7 @@ export interface ItemModel {
     sku: string,
 }
 
-export const ItemModelPath = "Items"
+export const ItemCollectionPath = "Items"
 
 export interface ItemDisplayModel {
     name: string,
