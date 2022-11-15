@@ -1,21 +1,23 @@
 <app-header></app-header>
 <div class="main-wrapper" fxLayout="column" fxLayoutAlign="center start">
-  <div class="filter-wrapper" fxLayout="row" fxLayoutAlign="center start">
-    <mat-card class="box">
-      <mat-card-content>
-        <mat-form-field appearance="standard">
-          <mat-label>Filter</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-        </mat-form-field>
-      </mat-card-content>
-    </mat-card>
-    <mat-card class="box">
-      <mat-card-content>
-        <button mat-button (click)="openAddItemDialog()">Hozzáadás</button>
-      </mat-card-content>
-    </mat-card>
-  </div>
   <mat-card class="box">
+    <mat-card-title>Irányítópult</mat-card-title>
+
+    <div class="filter-wrapper" fxLayout="row" fxLayoutAlign="center start">
+      <mat-card class="box">
+        <mat-card-content>
+          <mat-form-field appearance="standard">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="box">
+        <mat-card-content>
+          <button mat-button (click)="openAddItemDialog()">Hozzáadás</button>
+        </mat-card-content>
+      </mat-card>
+    </div>
 
     <table mat-table [dataSource]="items" multiTemplateDataRows class="mat-elevation-z8">
       <ng-container matColumnDef="name">
@@ -68,8 +70,8 @@
 
             <div class="example-element-description">{{element.upc}}</div>
             <div class="example-element-description"> {{element.summary}} </div>
-            <div class="example-element-description"> {{element.purchasePrice}} </div>
-            <div class="example-element-description"> {{element.sellingPrice}} </div>
+            <div class="example-element-description"> {{element.purchasePrice}} Ft</div>
+            <div class="example-element-description"> {{element.sellingPrice}} Ft</div>
           </div>
         </td>
       </ng-container>
@@ -83,48 +85,5 @@
         <td class="mat-cell" colspan="4">Nem találtunk ilyen terméket :(</td>
       </tr>
     </table>
-
-
-    <!--<table mat-table [dataSource]="items">
-            <mat-card-content>
-
-                <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef> Name </th>
-                    <td mat-cell *matCellDef="let item"> {{item.name}} </td>
-                </ng-container>
-            
-                <ng-container matColumnDef="sku">
-                    <th mat-header-cell *matHeaderCellDef> SKU </th>
-                    <td mat-cell *matCellDef="let item"> {{item.sku}} </td>
-                </ng-container>
-            
-                <ng-container matColumnDef="categories">
-                    <th mat-header-cell *matHeaderCellDef> Category </th>
-                    <td mat-cell *matCellDef="let item"> {{item.categories}} </td>
-                </ng-container>
-            
-                <ng-container matColumnDef="warehouse">
-                    <th mat-header-cell *matHeaderCellDef> Warehouse </th>
-                    <td mat-cell *matCellDef="let item"> {{item.warehouse}} </td>
-                </ng-container>
-                
-                <ng-container matColumnDef="manufacturer">
-                    <th mat-header-cell *matHeaderCellDef> Manufacturer </th>
-                    <td mat-cell *matCellDef="let item"> {{item.manufacturer}} </td>
-                </ng-container>
-
-                <ng-container matColumnDef="qty">
-                    <th mat-header-cell *matHeaderCellDef> Quantity </th>
-                    <td mat-cell *matCellDef="let item"> {{item.qty}} </td>
-                </ng-container>
-            
-                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-                <tr class="mat-row" *matNoDataRow>
-                    <td class="mat-cell" colspan="4">Nem találtunk ilyen terméket :(</td>
-                </tr>
-            </mat-card-content>
-        </table> -->
   </mat-card>
 </div>

@@ -19,7 +19,7 @@
                 <mat-form-field appearance="fill" class="form-field">
                     <mat-label>Jelszó:</mat-label>
                     <input matInput placeholder = "******" formControlName = "password" [type]="hide ? 'password' : 'text'" required>
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                     <mat-error *ngIf="this.signupForm.get('password')?.invalid">{{getErrorMessagePassword()}}</mat-error>
@@ -28,6 +28,6 @@
             </mat-card-content>
             <button type="submit" mat-raised-button color="primary" class="btn-block" [disabled]="!signupForm.valid">Regisztrálok</button>
         </form>
-        <button mat-raised-button color="basic" class="btn-block" (click)="goToPage('/login');">Bejelentkezés</button>
+        <button type="button" mat-raised-button color="basic" class="btn-block" (click)="goToPage('/login');">Bejelentkezés</button>
     </mat-card>
 </div>

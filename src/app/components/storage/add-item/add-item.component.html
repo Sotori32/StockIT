@@ -53,17 +53,19 @@
     </mat-form-field>
     <mat-form-field appearance="standard" class="form-field">
       <mat-label>Vételi ár:</mat-label>
-      <input matInput placeholder="Terméknév" type="number" formControlName="purchasePrice" required>
+      <input matInput placeholder="Terméknév" type="number" class="step" formControlName="purchasePrice" required>
+      <span matSuffix>Ft</span>
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
     </mat-form-field>
     <mat-form-field appearance="standard" class="form-field">
       <mat-label>Eladási ár:</mat-label>
-      <input matInput placeholder="Terméknév" type="number" formControlName="sellingPrice" required>
+      <input matInput placeholder="Terméknév" type="number" class="step" formControlName="sellingPrice" required>
+      <span matSuffix>Ft</span>
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
     </mat-form-field>
     <mat-form-field appearance="standard" class="form-field">
       <mat-label>Mennyiség:</mat-label>
-      <input matInput placeholder="Terméknév" type="number" formControlName="quantity" required>
+      <input matInput placeholder="Terméknév" type="number" class="qty" formControlName="quantity" required>
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
     </mat-form-field>
   </div>

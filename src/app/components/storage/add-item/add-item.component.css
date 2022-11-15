@@ -1,0 +1,12 @@
+.qty {
+    text-align: right;
+}
+
+input.step::-webkit-outer-spin-button,
+.step::-webkit-inner-spin-button {
+    display: none;
+}
+
+input.step {
+    -moz-appearance: textfield;
+}
