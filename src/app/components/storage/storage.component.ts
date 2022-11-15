@@ -32,7 +32,8 @@ export class StorageComponent implements OnInit, OnDestroy {
     'categories',
     'warehouse',
     'manufacturer',
-    'qty'
+    'qty',
+    'expiryDate'
   ];
 
   columnsToDisplayWithExpand = [
@@ -65,7 +66,8 @@ export class StorageComponent implements OnInit, OnDestroy {
             summary: item.data.summary ?? "",
             purchasePrice: item.data.purchasePrice,
             sellingPrice: item.data.sellingPrice,
-            id: item.id
+            id: item.id,
+            expiryDate: item.data.expiryDate
           } as ItemDisplayModel
         })
       }))

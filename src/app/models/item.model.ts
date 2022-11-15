@@ -15,6 +15,7 @@ export interface ItemModel {
     warehouse: DocumentReference<WarehouseModel>
     upc: string,
     sku: string,
+    expiryDate: string,
 }
 
 export const ItemCollectionPath = "Items"
@@ -31,6 +32,7 @@ export interface ItemDisplayModel {
     purchasePrice: number,
     sellingPrice: number,
     id: string,
+    expiryDate: string,
 }
 
 export const itemConverter: FirestoreDataConverter<ItemModel> = {
@@ -38,7 +40,7 @@ export const itemConverter: FirestoreDataConverter<ItemModel> = {
         return {
             name: item.name, summary: item.summary, purchasePrice: item.purchasePrice,
             category: item.category, manufacturer: item.manufacturer, quantity: item.quantity,
-            sellingPrice: item.sellingPrice, sku: item.sku, upc: item.upc, warehouse: item.warehouse
+            sellingPrice: item.sellingPrice, sku: item.sku, upc: item.upc, warehouse: item.warehouse, expiryDate: item.expiryDate
         }
     },
     fromFirestore: function (snapshot: QueryDocumentSnapshot<DocumentData>, options?: SnapshotOptions | undefined): ItemModel {
@@ -46,7 +48,7 @@ export const itemConverter: FirestoreDataConverter<ItemModel> = {
         return {
             name: data['name'], summary: data['summary'], purchasePrice: data['purchasePrice'],
             quantity: data['quantity'], sellingPrice: data['sellingPrice'], category: data['category'],
-            manufacturer: data['manufacturer'], sku: data['sku'], upc: data['upc'], warehouse: data['warehouse']
+            manufacturer: data['manufacturer'], sku: data['sku'], upc: data['upc'], warehouse: data['warehouse'], expiryDate: data['expiryDate']
         }
     }
 }

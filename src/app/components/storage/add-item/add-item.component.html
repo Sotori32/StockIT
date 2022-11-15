@@ -68,6 +68,11 @@
       <input matInput placeholder="Terméknév" type="number" class="qty" formControlName="quantity" required>
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
     </mat-form-field>
+    <mat-form-field appearance="standard" class="form-field">
+      <mat-label>Lejárati dátum:</mat-label>
+      <input matInput placeholder="Terméknév" formControlName="expiryDate">
+      <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
+    </mat-form-field>
   </div>
   <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Mégse</button>

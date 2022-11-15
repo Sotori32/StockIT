@@ -76,6 +76,7 @@ export class AddItemComponent implements OnInit, OnDestroy {
     purchasePrice: new FormControl(this.isEditing ? this.data?.purchasePrice! : null, [Validators.required]),
     sellingPrice: new FormControl(this.isEditing ? this.data?.sellingPrice! : null, [Validators.required]),
     quantity: new FormControl(this.isEditing ? this.data?.qty! : null, [Validators.required]),
+    expiryDate: new FormControl(this.isEditing ? this.data?.expiryDate! : '')
   })
 
   public getCategoryById(id: string) {
@@ -124,9 +125,9 @@ export class AddItemComponent implements OnInit, OnDestroy {
   }
 
 
-  onSubmit(value: Partial<{ itemName: string | null; sku: string | null; upc: string | null; summary: string | null; category: string[] | null; manufacturer: string | null; warehouse: string | null; sellingPrice: number | null; purchasePrice: number | null; quantity: number | null; }>) {
+  onSubmit(value: Partial<{ itemName: string | null; sku: string | null; upc: string | null; summary: string | null; category: string[] | null; manufacturer: string | null; warehouse: string | null; sellingPrice: number | null; purchasePrice: number | null; quantity: number | null; expiryDate: string | null }>) {
 
-    const item = { name: value.itemName ?? "", sku: value.sku ?? "", upc: value.upc ?? "", summary: value.summary ?? "", category: value.category?.map(cid => this.getCategoryById(cid).ref) ?? [], manufacturer: value.manufacturer ? this.getManufacturerById(value.manufacturer).ref : null, warehouse: this.getWarehouseById(value.warehouse!).ref, purchasePrice: value.purchasePrice ?? 0, sellingPrice: value.sellingPrice ?? 0, quantity: value.quantity ?? 0 } as ItemModel
+    const item = { name: value.itemName ?? "", sku: value.sku ?? "", upc: value.upc ?? "", summary: value.summary ?? "", category: value.category?.map(cid => this.getCategoryById(cid).ref) ?? [], manufacturer: value.manufacturer ? this.getManufacturerById(value.manufacturer).ref : null, warehouse: this.getWarehouseById(value.warehouse!).ref, purchasePrice: value.purchasePrice ?? 0, sellingPrice: value.sellingPrice ?? 0, quantity: value.quantity ?? 0, expiryDate: value.expiryDate ?? "" } as ItemModel
     if (this.isEditing) {
       this.itemService.editItem(this.data!.id, item)
       return
