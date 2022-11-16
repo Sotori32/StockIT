@@ -1,14 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { combineLatest, expand, mergeMap, of, Subscription, zip } from 'rxjs';
 import { ItemDisplayModel, ItemModel } from 'src/app/models/item.model';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { AddItemComponent } from './add-item/add-item.component';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { ItemService } from 'src/app/services/item/item.service';
 import { ManufacturerModel } from 'src/app/models/manufacturer.model';
 import { DocumentReference } from '@angular/fire/compat/firestore';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 @Component({
   selector: 'app-storage',
@@ -43,13 +44,10 @@ export class StorageComponent implements OnInit, OnDestroy {
 
   expandedElement: ItemDisplayModel | null = null;
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-  }
+  public items: ItemDisplayModel[] = [];
 
-
-  public items: ItemDisplayModel[] = []
-
+  public dataSource = new MatTableDataSource(this.items);
+  
   constructor(private storage: StorageService, private dialog: MatDialog, private itemService: ItemService) {
     this.subs.add(this.storage.getAllItems()
       .subscribe((returned) => {
@@ -72,15 +70,22 @@ export class StorageComponent implements OnInit, OnDestroy {
         })
       }))
   }
+
+  ngOnInit(): void {
+    
+  }
+
   ngOnDestroy(): void {
     this.subs.unsubscribe()
   }
 
-  openAddItemDialog() {
-    this.dialog.open(AddItemComponent, {data: null})
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
   }
 
-  ngOnInit(): void {
+  openAddItemDialog() {
+    this.dialog.open(AddItemComponent, {data: null})
   }
 
   public deleteItem(id: string) {

@@ -1,49 +1,54 @@
 table {
-    width: 100%;
-    table-layout: fixed;
+  width: 100%;
+  table-layout: fixed;
 }
 
-tr.example-detail-row {
-    height: 0;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):hover {
-    background: whitesmoke;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):active {
-    background: #efefef;
-  }
-  
-  .example-element-row td {
-    border-bottom-width: 0;
-  }
-  
-  .example-element-detail {
-    overflow: hidden;
-    display: flex;
-  }
-  
-  .example-element-diagram {
-    min-width: 80px;
-    border: 2px solid black;
-    padding: 8px;
-    font-weight: lighter;
-    margin: 8px 0;
-    height: 104px;
-  }
-  
-  .example-element-symbol {
-    font-weight: bold;
-    font-size: 40px;
-    line-height: normal;
-  }
-  
-  .example-element-description {
-    padding: 16px;
-  }
-  
-  .example-element-description-attribution {
-    opacity: 0.5;
-  }
+th.mat-sort-header-sorted {
+  color: black;
+}
 
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):nth-child(2n+1):hover {
+  background: #F0F0FF;
+}
+
+tr.element-row:not(.expanded-row):nth-child(4n+1):hover {
+  background: #9093DF;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #FFF;
+}
+
+tr.element-row:nth-child(2n+1) {
+  background: #FFF;
+}
+
+tr.element-row:nth-child(4n+1) {
+  background: #A9ACE5;
+}
+
+th.mat-header-cell {
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.element-description {
+  padding: 16px;
+}
+
+.element-description-attribution {
+  opacity: 0.5;
+}

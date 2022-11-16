@@ -25,8 +25,10 @@ export class ManufacturerService {
     .pipe(mergeMap(organization => {
       return this.store.doc<OrganizationModel>(organization.docs[0].ref).snapshotChanges()
     }), mergeMap(organization => {
-      const manufacturerIds = organization.payload.data()!.manufacturers.map(m => m.id)
-      return this.store.collection<ManufacturerModel>(ManufacturerCollectionPath, ref => ref.where('__name__', "in", manufacturerIds)).snapshotChanges()
+      return combineLatest(organization.payload.data()!.manufacturers.map(m => {
+        const manufacturerIds = m.id;
+        return this.store.collection<ManufacturerModel>(ManufacturerCollectionPath, ref => ref.where('__name__', "==", manufacturerIds)).snapshotChanges()
+      }))
     }))
   }
   

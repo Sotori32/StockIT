@@ -7,6 +7,7 @@ import { StorageComponent } from './components/storage/storage.component';
 import { WarehousesComponent } from './components/warehouses/warehouses.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { ManufacturersComponent } from './components/manufacturers/manufacturers.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/storage', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'warehouses', title: 'Raktárak | StockIT', component: WarehousesComponent, canActivate: [AuthGuard]},
   { path: 'categories', title: 'Kategóriák | StockIT', component: CategoriesComponent, canActivate: [AuthGuard]},
   { path: 'manufacturers', title: 'Gyártók | StockIT', component: ManufacturersComponent, canActivate: [AuthGuard]},
+  {path:'user-settings', title: 'Felhasználói Beállítások | StockIT', component: UserSettingsComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

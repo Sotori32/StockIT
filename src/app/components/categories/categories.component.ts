@@ -18,7 +18,7 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.subs.add(this.categoryService.getAllOrganizationCategoriesSync().subscribe(categories => {
-      this.categories = categories.map(c => {return {id: c.payload.doc.id, name: c.payload.doc.data()?.name!}})
+      this.categories = categories.map(c => c.map(c => {return {id: c.payload.doc.id, name: c.payload.doc.data()?.name!}})).flat()
     }))
   }
 

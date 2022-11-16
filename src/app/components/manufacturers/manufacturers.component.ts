@@ -18,7 +18,7 @@ export class ManufacturersComponent implements OnInit {
 
   ngOnInit(): void {
     this.subs.add(this.manufacturerServices.getAllManufacturersInOrganizationSync().subscribe(manufacturers => {
-      this.manufacturers = manufacturers.map(c => { return { id: c.payload.doc.id, name: c.payload.doc.data()?.name! } })
+      this.manufacturers = manufacturers.map(m => m.map(m => {return {id: m.payload.doc.id, name: m.payload.doc.data()?.name!}})).flat()
     }))
   }
 

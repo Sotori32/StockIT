@@ -39,6 +39,7 @@ import { WarehousesComponent } from './components/warehouses/warehouses.componen
 import { AddCategoryComponent } from './components/categories/add-category/add-category.component';
 import { AddManufacturersComponent } from './components/manufacturers/add-manufacturers/add-manufacturers.component';
 import { AddWarehouseComponent } from './components/warehouses/add-warehouses/add-warehouses.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AddWarehouseComponent } from './components/warehouses/add-warehouses/ad
     AddCategoryComponent,
     AddManufacturersComponent,
     AddWarehouseComponent,
+    UserSettingsComponent,
   ],
   imports: [
     BrowserModule,

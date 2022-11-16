@@ -1,0 +1,46 @@
+<app-header></app-header>
+<div class="main-wrapper" fxLayout="column" fxLayoutAlign="center start">
+    <mat-card class="box">
+      <mat-card-title>Felhasználói beállítások</mat-card-title>
+    </mat-card>
+    <mat-card>
+        <div>Név: {{user?.name ?? ""}}</div>
+        <div>Email cím: {{user?.email ?? ""}}</div>
+        <div>Tulajdonos: {{user?.isOwner ? "Igen" : "Nem"}}</div>
+    </mat-card>
+    <mat-card>
+        <mat-card-header>Jelszó megváltoztatása</mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword(changePasswordForm.value)" class="form">
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Jelenlegi jelszó:</mat-label>
+                    <input matInput placeholder = "******" formControlName = "currentPassword" [type]="hide ? 'password' : 'text'" required>
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="this.changePasswordForm.get('currentPassword')?.invalid">{{getErrorMessagePassword()}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Új jelszó:</mat-label>
+                    <input matInput placeholder = "******" formControlName = "newPassword" [type]="hide ? 'password' : 'text'" required>
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="this.changePasswordForm.get('newPassword')?.invalid">{{getErrorMessagePassword()}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Új jelszó megerősítése:</mat-label>
+                    <input matInput placeholder = "******" formControlName = "confirmNewPassword" [type]="hide ? 'password' : 'text'" required>
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="this.changePasswordForm.get('confirmNewPassword')?.invalid">{{getErrorMessagePassword()}}</mat-error>
+                </mat-form-field>
+                <mat-error *ngIf="changePasswordForm.errors ? changePasswordForm.errors['passwordsNotMatch'] : false">Az új jelszó nem egyezik meg a megerősítéssel.</mat-error>
+                <p class="star-fill">A csillaggal (*) jelölt mezők kitöltése kötelező.</p>
+                <button type="submit" mat-raised-button color="primary" class="btn-block" [disabled]="!changePasswordForm.valid">Jelszó megváltoztatása</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+  

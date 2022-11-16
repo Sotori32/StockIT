@@ -7,7 +7,8 @@ export interface OrganizationModel {
     categories: DocumentReference<CategoryModel>[],
     manufacturers: DocumentReference<ManufacturerModel>[],
     users: string[],
-    warehouses: DocumentReference<WarehouseModel>[]
+    warehouses: DocumentReference<WarehouseModel>[],
+    owner: string
 }
 
 export const OrganizationCollectionPath = "Organization"

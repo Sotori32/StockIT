@@ -26,8 +26,10 @@ export class CategoryService {
     .pipe(mergeMap(organization => {
       return this.store.doc<OrganizationModel>(organization.docs[0].ref).snapshotChanges()
     }), mergeMap(organization => {
-      const categoryIds = organization.payload.data()!.categories.map(c => c.id)
-      return this.store.collection<CategoryModel>(CategoryCollectionPath, ref => ref.where('__name__', "in", categoryIds)).snapshotChanges()
+      return combineLatest(organization.payload.data()!.categories.map(c => {
+        const categoryId = c.id
+        return this.store.collection<CategoryModel>(CategoryCollectionPath, ref => ref.where('__name__', "==", categoryId)).snapshotChanges()
+      }))
     }))
   }
   
