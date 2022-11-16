@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { combineLatest, expand, mergeMap, of, Subscription, zip } from 'rxjs';
 import { ItemDisplayModel, ItemModel } from 'src/app/models/item.model';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,6 +9,7 @@ import { ItemService } from 'src/app/services/item/item.service';
 import { ManufacturerModel } from 'src/app/models/manufacturer.model';
 import { DocumentReference } from '@angular/fire/compat/firestore';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -23,7 +24,9 @@ import { MatTableDataSource } from '@angular/material/table';
     ]),
   ],
 })
-export class StorageComponent implements OnInit, OnDestroy {
+export class StorageComponent implements OnInit, OnDestroy, AfterViewInit {
+
+  @ViewChild('tableSort') tableSort = new MatSort();
 
   private subs = new Subscription();
 
@@ -42,17 +45,19 @@ export class StorageComponent implements OnInit, OnDestroy {
     'expand',
   ];
 
+  columnsToDisplayWithButtons = [
+    ...this.columnsToDisplayWithExpand,
+    'buttons',
+  ]
+
   expandedElement: ItemDisplayModel | null = null;
 
-  public items: ItemDisplayModel[] = [];
-
-  public dataSource = new MatTableDataSource(this.items);
+  public items = new MatTableDataSource<ItemDisplayModel>([]);
   
   constructor(private storage: StorageService, private dialog: MatDialog, private itemService: ItemService) {
     this.subs.add(this.storage.getAllItems()
       .subscribe((returned) => {
-        this.items = returned.map(([item, warehouse, categories, manufacturer]) => {
-          
+        this.items = new MatTableDataSource(returned.map(([item, warehouse, categories, manufacturer]) => {
           return {
             name: item.data.name,
             sku: item.data.sku,
@@ -67,12 +72,14 @@ export class StorageComponent implements OnInit, OnDestroy {
             id: item.id,
             expiryDate: item.data.expiryDate
           } as ItemDisplayModel
-        })
-      }))
-  }
+
+        }));
+        this.items.sort = this.tableSort;
+      })
+  )}
 
   ngOnInit(): void {
-    
+
   }
 
   ngOnDestroy(): void {
@@ -81,7 +88,11 @@ export class StorageComponent implements OnInit, OnDestroy {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+    this.items.filter = filterValue.trim().toLocaleLowerCase();
+  }
+
+  ngAfterViewInit() {
+    this.items.sort = this.tableSort;
   }
 
   openAddItemDialog() {

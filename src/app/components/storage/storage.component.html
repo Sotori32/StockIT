@@ -16,7 +16,7 @@
       </mat-card-content>
     </div>
 
-    <table mat-table [dataSource]="items" multiTemplateDataRows matSort>
+    <table mat-table [dataSource]="items" multiTemplateDataRows matSort #tableSort="matSort" matSortActive="name" matSortDirection="asc" matSortDisableClear="true">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Név </th>
         <td mat-cell *matCellDef="let item"> {{item.name}} </td>
@@ -53,13 +53,19 @@
       </ng-container>
 
       <ng-container matColumnDef="expand">
-        <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+        <th mat-header-cell *matHeaderCellDef aria-label="row expand">&nbsp;</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button aria-label="Expand row"
+          <button mat-icon-button aria-label="expand row"
             (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
             <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
             <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
           </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="buttons">
+        <th mat-header-cell *matHeaderCellDef aria-label="row buttons">&nbsp;</th>
+        <td mat-cell *matCellDef="let element" class="buttons">
           <button mat-raised-button (click)="editItem(element)">Szerkesztés</button>
           <button mat-raised-button color="warn" (click)="deleteItem(element.id)">Törlés</button>
         </td>
@@ -79,7 +85,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand; sticky: true"></tr>
-      <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="element-row"
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithButtons;" class="element-row"
         [class.example-expanded-row]="expandedElement === element">
       </tr>
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>

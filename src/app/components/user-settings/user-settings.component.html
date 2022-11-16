@@ -37,6 +37,7 @@
                     <mat-error *ngIf="this.changePasswordForm.get('confirmNewPassword')?.invalid">{{getErrorMessagePassword()}}</mat-error>
                 </mat-form-field>
                 <mat-error *ngIf="changePasswordForm.errors ? changePasswordForm.errors['passwordsNotMatch'] : false">Az új jelszó nem egyezik meg a megerősítéssel.</mat-error>
+                <p class="current-pass-error" *ngIf="isAuthError">Helytelen jelenlegi jelszó.</p>
                 <p class="star-fill">A csillaggal (*) jelölt mezők kitöltése kötelező.</p>
                 <button type="submit" mat-raised-button color="primary" class="btn-block" [disabled]="!changePasswordForm.valid">Jelszó megváltoztatása</button>
             </form>

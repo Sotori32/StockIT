@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FirebaseError } from 'firebase/app';
+import { catchError } from 'rxjs';
 import { UserModel } from 'src/app/models/user.model';
 import { LoginService } from 'src/app/services/login/login.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -12,10 +14,11 @@ import { UserService } from 'src/app/services/user/user.service';
 export class UserSettingsComponent implements OnInit {
 
   hide = true;
+  isAuthError = false;
 
   constructor(private userService: UserService, private loginService: LoginService) { }
 
-  public user: UserModel | undefined = undefined; 
+  public user: UserModel | undefined = undefined;
 
   ngOnInit(): void {
     this.userService.getUserInfoSync().subscribe(user => {
@@ -31,25 +34,27 @@ export class UserSettingsComponent implements OnInit {
     validators: [this.checkPasswords('newPassword', 'confirmNewPassword')]
   })
 
-  checkPasswords (pass: string, confPass: string) { 
+  checkPasswords(pass: string, confPass: string) {
     return function (group: any) {
       let passValue = group!.get(pass).value;
       let confirmPassValue = group.get(confPass).value
 
-      if (passValue === confirmPassValue){
+      if (passValue === confirmPassValue) {
         return null;
       }
-      return {'passwordsNotMatch': true}
+      return { 'passwordsNotMatch': true }
     }
   }
 
-  public changePassword(value: Partial<{currentPassword: string | null, newPassword: string | null}>) {
+  public async changePassword(value: Partial<{ currentPassword: string | null, newPassword: string | null }>) {
     if (this.user?.email) {
-      this.loginService.changePassword(this.user?.email, value.currentPassword!, value.newPassword!).subscribe(() => {
-        
-      }, (err) => {
-        console.error(err)
-      })
+      try {
+        await this.loginService.changePassword(this.user.email, value.currentPassword!, value.newPassword!)
+      } catch (error) {
+        console.log(error)
+        this.isAuthError = true;
+        debugger; 
+      }
     }
   }
 

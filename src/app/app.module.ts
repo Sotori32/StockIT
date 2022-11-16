@@ -24,6 +24,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { matSelectAnimations, MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSortModule } from '@angular/material/sort';
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -83,6 +84,7 @@ import { UserSettingsComponent } from './components/user-settings/user-settings.
     MatDialogModule,
     MatSelectModule,
     MatMenuModule,
+    MatSortModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

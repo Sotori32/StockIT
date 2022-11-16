@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { FirebaseApp } from '@angular/fire/app';
+import { FirebaseApp, FirebaseError } from '@angular/fire/app';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { filter, from, map, mergeMap, of, zip } from 'rxjs';
+import { catchError, filter, from, lastValueFrom, map, mergeMap, of, zip } from 'rxjs';
 import { OrganizationModel } from 'src/app/models/organization.model';
 import { UserModel } from 'src/app/models/user.model';
 
@@ -33,12 +33,22 @@ export class LoginService {
     });
   }
 
-  public changePassword(email: string, currPassword: string, password: string) {
-    return this.auth.user.pipe(filter(user => !!user), map(u => u!), mergeMap(user => {
-      return zip(from(this.auth.signInWithEmailAndPassword(email, currPassword)), of(user))
-    }), mergeMap(([credentials, user]) => {
-      return user.updatePassword(password)
-    }))
+  public async changePassword(email: string, currPassword: string, password: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+        this.auth.currentUser.then((user) => {
+          this.auth.signInWithEmailAndPassword(email, currPassword).then((credentials) => {
+            return user?.updatePassword(password).then(() => {
+              resolve()
+            }, (error) => {
+              reject(error)
+            })
+          }, (error) => {
+            reject(error)
+          })
+        }, (error) => {
+          reject(error)
+        })
+    })
   }
 
   public logout() {
