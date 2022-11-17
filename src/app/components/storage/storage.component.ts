@@ -47,7 +47,8 @@ export class StorageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   columnsToDisplayWithButtons = [
     ...this.columnsToDisplayWithExpand,
-    'buttons',
+    'edit-button',
+    'delete-button',
   ]
 
   expandedElement: ItemDisplayModel | null = null;

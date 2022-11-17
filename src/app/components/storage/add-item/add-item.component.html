@@ -1,6 +1,7 @@
 <h1 mat-dialog-title>Termék hozzáadása</h1>
 <form [formGroup]="addItemForm" (ngSubmit)="onSubmit(addItemForm.value)" class="form">
   <div mat-dialog-content>
+    <div class="main-wrapper" fxLayout="column" fxLayoutAlign="center start">
     <mat-form-field appearance="standard" class="form-field">
       <mat-label>Termék neve:</mat-label>
       <input matInput placeholder="Terméknév" formControlName="itemName" required>
@@ -73,6 +74,7 @@
       <input matInput placeholder="Terméknév" formControlName="expiryDate">
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
     </mat-form-field>
+  </div>
   </div>
   <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Mégse</button>
