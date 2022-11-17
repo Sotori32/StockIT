@@ -29,6 +29,7 @@ export class StorageComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('tableSort') tableSort = new MatSort();
 
   private subs = new Subscription();
+  loading = false;
 
   columnsToDisplay = [
     'name',
@@ -56,8 +57,10 @@ export class StorageComponent implements OnInit, OnDestroy, AfterViewInit {
   public items = new MatTableDataSource<ItemDisplayModel>([]);
   
   constructor(private storage: StorageService, private dialog: MatDialog, private itemService: ItemService) {
+    this.loading = true;
     this.subs.add(this.storage.getAllItems()
       .subscribe((returned) => {
+        this.loading = false;
         this.items = new MatTableDataSource(returned.map(([item, warehouse, categories, manufacturer]) => {
           return {
             name: item.data.name,
