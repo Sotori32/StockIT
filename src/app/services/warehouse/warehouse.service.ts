@@ -35,7 +35,7 @@ export class WarehouseService {
       warehouse.userCanWrite = [...new Set(warehouse.userCanWrite)];
       this.store.collection<WarehouseModel>(WarehouseCollectionPath).add(warehouse).then(warehouseRef => {
         this.organizationService.getUserOrganization().pipe(first()).subscribe(org => {
-          this.store.doc<OrganizationModel>(org.docs[0].ref).update({warehouses: [...org.docs[0].data().warehouses, warehouseRef]})
+          this.store.doc<OrganizationModel>(org.ref).update({warehouses: [...org.data().warehouses, warehouseRef]})
         })
       })
     })
@@ -45,7 +45,7 @@ export class WarehouseService {
     const wref = this.store.doc<WarehouseModel>(WarehouseCollectionPath + "/" + warehouse.id).ref;
     this.store.doc<WarehouseModel>(WarehouseCollectionPath + "/" + warehouse.id).delete().then(() => {
       this.organizationService.getUserOrganization().pipe(first()).subscribe(org => {
-        this.store.doc<OrganizationModel>(org.docs[0].ref).update({warehouses: org.docs[0].data().warehouses.filter(w => w.id !== warehouse.id)})
+        this.store.doc<OrganizationModel>(org.ref).update({warehouses: org.data().warehouses.filter(w => w.id !== warehouse.id)})
       })
       this.store.collection<ItemModel>(ItemCollectionPath, ref => ref.where('warehouse', '==', wref)).get().pipe(first()).subscribe(items => {
         items.docs.map(item => {

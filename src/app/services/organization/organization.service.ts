@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { from } from 'rxjs';
+import { from, map } from 'rxjs';
 import { OrganizationCollectionPath, OrganizationModel } from 'src/app/models/organization.model';
 
 @Injectable({
@@ -12,6 +12,8 @@ export class OrganizationService {
   constructor(private auth: Auth, private store: AngularFirestore) { }
 
   public getUserOrganization() {
-    return from(this.store.collection<OrganizationModel>(OrganizationCollectionPath).ref.where('users', 'array-contains', this.auth.currentUser!.uid).get())
+    return from(this.store.collection<OrganizationModel>(OrganizationCollectionPath).ref.where('users', 'array-contains', this.auth.currentUser!.uid).get()).pipe(map(orgs => {
+      return orgs.docs[0]
+    }))
   }
 }

@@ -41,6 +41,7 @@ import { AddCategoryComponent } from './components/categories/add-category/add-c
 import { AddManufacturersComponent } from './components/manufacturers/add-manufacturers/add-manufacturers.component';
 import { AddWarehouseComponent } from './components/warehouses/add-warehouses/add-warehouses.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { InviteUserComponent } from './components/user-settings/invite-user/invite-user.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { UserSettingsComponent } from './components/user-settings/user-settings.
     AddManufacturersComponent,
     AddWarehouseComponent,
     UserSettingsComponent,
+    InviteUserComponent,
   ],
   imports: [
     BrowserModule,

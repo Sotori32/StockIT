@@ -43,5 +43,70 @@
             </form>
         </mat-card-content>
     </mat-card>
+    <mat-card class="box" *ngIf="this.user?.isOwner">
+        <mat-card-title>Alkalmazottak kezelése</mat-card-title>
+        <mat-card-content class="box">
+            <mat-card-content>
+              <button mat-button (click)="openInviteUserDialog()">Hozzáadás</button>
+            </mat-card-content>
+        </mat-card-content>
+        <mat-card-content>
+            <table mat-table [dataSource]="users" class="mat-elevation-z8">
+    
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Név </th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> E-mail </th>
+                    <td mat-cell *matCellDef="let element"> {{element.mail}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+                    <td mat-cell *matCellDef="let element">
+                      <button mat-raised-button color="warn" (click)="deleteUser(element.documentId)">Törlés</button>
+                    </td>
+                  </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="box" *ngIf="this.user?.isOwner && this.invites.length > 0">
+        <mat-card-title>Meghívók kezelése</mat-card-title>
+        <mat-card-content>
+            <table mat-table [dataSource]="invites" class="mat-elevation-z8">
+    
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Név </th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> E-mail </th>
+                    <td mat-cell *matCellDef="let element"> {{element.mail}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="link">
+                    <th mat-header-cell *matHeaderCellDef> Link </th>
+                    <td mat-cell *matCellDef="let element"> {{element.link}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+                    <td mat-cell *matCellDef="let element">
+                      <button mat-raised-button color="warn" (click)="deleteInvite(element.id)">Törlés</button>
+                    </td>
+                  </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsInvite"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsInvite;"></tr>
+              </table>
+              
+        </mat-card-content>
+    </mat-card>
 </div>
-  

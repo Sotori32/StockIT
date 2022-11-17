@@ -17,14 +17,14 @@ export class CategoryService {
   public getAllOrganizationCategories() {
     return this.organizationService.getUserOrganization()
     .pipe(mergeMap(organization => {
-      return combineLatest(organization.docs[0].data().categories.map(category => category.get()))
+      return combineLatest(organization.data().categories.map(category => category.get()))
     }))
   }
 
   public getAllOrganizationCategoriesSync() {
     return this.organizationService.getUserOrganization()
     .pipe(mergeMap(organization => {
-      return this.store.doc<OrganizationModel>(organization.docs[0].ref).snapshotChanges()
+      return this.store.doc<OrganizationModel>(organization.ref).snapshotChanges()
     }), mergeMap(organization => {
       return combineLatest(organization.payload.data()!.categories.map(c => {
         const categoryId = c.id
@@ -36,7 +36,7 @@ export class CategoryService {
   public addCategory(category: CategoryModel) {
     this.store.collection<CategoryModel>(CategoryCollectionPath).add(category).then(categoryRef => {
       firstValueFrom(this.organizationService.getUserOrganization()).then(org => {
-        this.store.doc(org.docs[0].ref).update({categories: [...org.docs[0].data().categories, categoryRef]})
+        this.store.doc(org.ref).update({categories: [...org.data().categories, categoryRef]})
       })
     });
   }
@@ -48,7 +48,7 @@ export class CategoryService {
   public deleteCategory(id: string) {
     this.store.doc<CategoryModel>(CategoryCollectionPath + "/" + id).delete().then(() => {
       firstValueFrom(this.organizationService.getUserOrganization()).then(org => {
-        this.store.doc(org.docs[0].ref).update({categories: org.docs[0].data().categories.filter(c => c.id !== id)})
+        this.store.doc(org.ref).update({categories: org.data().categories.filter(c => c.id !== id)})
       })
       this.store.collection<ItemModel>(ItemCollectionPath, ref => ref.where('category', 'array-contains', this.store.doc<CategoryModel>(CategoryCollectionPath + "/" + id).ref)).get().subscribe(items => {
         items.docs.map(d => d.ref.update({category: d.data().category.filter(c => c.id !== id)}))

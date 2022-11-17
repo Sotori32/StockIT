@@ -16,14 +16,14 @@ export class ManufacturerService {
   public getAllManufacturersInOrganization() {
     return this.organizationService.getUserOrganization()
       .pipe(mergeMap(organization => {
-        return combineLatest(organization.docs[0].data().manufacturers.map(manufacturer => manufacturer.get()))
+        return combineLatest(organization.data().manufacturers.map(manufacturer => manufacturer.get()))
     }))
   }
 
   public getAllManufacturersInOrganizationSync() {
     return this.organizationService.getUserOrganization()
     .pipe(mergeMap(organization => {
-      return this.store.doc<OrganizationModel>(organization.docs[0].ref).snapshotChanges()
+      return this.store.doc<OrganizationModel>(organization.ref).snapshotChanges()
     }), mergeMap(organization => {
       return combineLatest(organization.payload.data()!.manufacturers.map(m => {
         const manufacturerIds = m.id;
@@ -35,7 +35,7 @@ export class ManufacturerService {
   public addManufacturer(manufacturer: ManufacturerModel) {
     this.store.collection<ManufacturerModel>(ManufacturerCollectionPath).add(manufacturer).then(manufacturerRef => {
       firstValueFrom(this.organizationService.getUserOrganization()).then(org => {
-        this.store.doc(org.docs[0].ref).update({manufacturers: [...org.docs[0].data().manufacturers, manufacturerRef]})
+        this.store.doc(org.ref).update({manufacturers: [...org.data().manufacturers, manufacturerRef]})
       })
     });
   }
@@ -48,7 +48,7 @@ export class ManufacturerService {
     this.store.doc<ManufacturerModel>(ManufacturerCollectionPath + "/" + id).delete().then(() => {
       // We delete the manufacturer from the currect users organization 
       firstValueFrom(this.organizationService.getUserOrganization()).then(org => {
-        this.store.doc<OrganizationModel>(org.docs[0].ref).update({manufacturers: org.docs[0].data().manufacturers.filter(m => m.id !== id)})
+        this.store.doc<OrganizationModel>(org.ref).update({manufacturers: org.data().manufacturers.filter(m => m.id !== id)})
       })
 
       // We also need to delete it from all items containing it
