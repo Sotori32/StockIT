@@ -93,3 +93,15 @@ th.mat-header-cell {
   width: 100%;
   height: 100%;
 }
+
+.mat-column-expand {
+  width: 5%;
+}
+
+.mat-column-edit-button {
+  width: 8%;
+}
+
+.mat-column-delete-button {
+  width: 5%;
+}
