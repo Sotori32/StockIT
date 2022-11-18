@@ -29,7 +29,8 @@ export class StorageComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('tableSort') tableSort = new MatSort();
 
   private subs = new Subscription();
-  loading = false;
+  
+  public loading = false;
 
   columnsToDisplay = [
     'name',

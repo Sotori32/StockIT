@@ -8,8 +8,8 @@
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Mégse</button>
-    <button type="submit" mat-button cdkFocusInitial mat-dialog-close [disabled]="!addManufacturerForm.valid" *ngIf="!isEditing">Hozzáadás</button>
-    <button type="submit" mat-button cdkFocusInitial mat-dialog-close [disabled]="!addManufacturerForm.valid" *ngIf="isEditing">Szerkesztés</button>
+    <button mat-raised-button color="basic" mat-dialog-close>Mégse</button>
+    <button type="submit" mat-raised-button color="primary" cdkFocusInitial mat-dialog-close [disabled]="!addManufacturerForm.valid" *ngIf="!isEditing">Hozzáadás</button>
+    <button type="submit" mat-raised-button color="primary" cdkFocusInitial mat-dialog-close [disabled]="!addManufacturerForm.valid" *ngIf="isEditing">Szerkesztés</button>
   </div>
 </form>

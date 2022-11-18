@@ -10,3 +10,7 @@ input.step::-webkit-outer-spin-button,
 input.step {
     -moz-appearance: textfield;
 }
+
+mat-form-field {
+    width: 40vw;
+}

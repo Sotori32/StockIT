@@ -1,54 +1,69 @@
 <app-header></app-header>
 <div class="main-wrapper" fxLayout="column" fxLayoutAlign="center start">
-    <mat-card class="box">
-        <mat-card-title>Raktárak kezelése</mat-card-title>
-        <mat-card-content class="box">
-          <mat-card-content>
-            <button mat-button (click)="addWarehouse()">Hozzáadás</button>
-          </mat-card-content>
-        </mat-card-content>
-        <mat-card-content>
-            <table mat-table [dataSource]="warehouses" class="mat-elevation-z8">
+  <mat-card class="box">
+    <mat-card-title>Raktárak kezelése</mat-card-title>
 
-                <!--- Note that these columns can be defined in any order.
-                      The actual rendered columns are set as a property on the row definition" -->
-                <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef> Név </th>
-                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                </ng-container>
-              
-                <!-- Position Column -->
-                <ng-container matColumnDef="address">
-                  <th mat-header-cell *matHeaderCellDef> Cím </th>
-                  <td mat-cell *matCellDef="let element"> {{element.address}} </td>
-                </ng-container>
-                
-              
-                <!-- Weight Column -->
-                <ng-container matColumnDef="place">
-                  <th mat-header-cell *matHeaderCellDef> Helység </th>
-                  <td mat-cell *matCellDef="let element"> {{element.place}} </td>
-                </ng-container>
-              
-                <!-- Symbol Column -->
-                <ng-container matColumnDef="postcode">
-                  <th mat-header-cell *matHeaderCellDef> Irányítószám </th>
-                  <td mat-cell *matCellDef="let element"> {{element.postcode}} </td>
-                </ng-container>
+    <div class="functions-wrapper" fxLayout="row" fxLayoutAlign="center center">
+      <mat-card-content>
+        <mat-form-field appearance="standard" class="searchbar">
+          <mat-label>Keresés</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Kezdjen el gépelni" #input>
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </mat-card-content>
 
-                <ng-container matColumnDef="actions">
-                  <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
-                  <td mat-cell *matCellDef="let element">
-                    <button mat-stroked-button (click)="editWarehouse(element)">Szerkesztés</button>
-                    <button mat-raised-button color="warn" (click)="deleteWarehouse(element)">Törlés</button>
-                  </td>
-                </ng-container>
-              
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
-              
-        </mat-card-content>
-    </mat-card>
+      <span class="spacer"></span>
+
+      <mat-card-content>
+        <button mat-raised-button color="primary" (click)="addWarehouse()">Hozzáadás</button>
+      </mat-card-content>
+    </div>
+
+    <div class="overlay" *ngIf="loading"></div>
+    <mat-card-content>
+      <table mat-table [dataSource]="warehouses" [class.spinner]="loading">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Név </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef> Cím </th>
+          <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="place">
+          <th mat-header-cell *matHeaderCellDef> Helység </th>
+          <td mat-cell *matCellDef="let element"> {{element.place}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="postcode">
+          <th mat-header-cell *matHeaderCellDef> Irányítószám </th>
+          <td mat-cell *matCellDef="let element"> {{element.postcode}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit-button">
+          <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-raised-button color="basic" (click)="editWarehouse(element)">Szerkesztés</button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete-button">
+          <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-raised-button color="warn" (click)="deleteWarehouse(element.id)">Törlés</button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="element-row"></tr>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="10" *ngIf="!loading">Nem találtunk ilyen terméket :(</td>
+        </tr>
+      </table>
+
+    </mat-card-content>
+  </mat-card>
 </div>

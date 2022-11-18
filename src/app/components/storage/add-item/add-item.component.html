@@ -4,22 +4,22 @@
     <div class="main-wrapper" fxLayout="column" fxLayoutAlign="center start">
     <mat-form-field appearance="standard" class="form-field">
       <mat-label>Termék neve:</mat-label>
-      <input matInput placeholder="Terméknév" formControlName="itemName" required>
+      <input matInput formControlName="itemName" required>
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
     </mat-form-field>
     <mat-form-field appearance="standard" class="form-field">
       <mat-label>SKU:</mat-label>
-      <input matInput placeholder="Terméknév" formControlName="sku" required>
+      <input matInput formControlName="sku" required>
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
     </mat-form-field>
     <mat-form-field appearance="standard" class="form-field">
       <mat-label>UPC:</mat-label>
-      <input matInput placeholder="Terméknév" formControlName="upc" required>
+      <input matInput formControlName="upc" required>
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
     </mat-form-field>
     <mat-form-field appearance="standard" class="form-field">
       <mat-label>Leírás:</mat-label>
-      <input matInput placeholder="Terméknév" formControlName="summary">
+      <textarea matInput formControlName="summary"></textarea>
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
     </mat-form-field>
     <mat-form-field appearance="standard" class="form-field">
@@ -54,31 +54,33 @@
     </mat-form-field>
     <mat-form-field appearance="standard" class="form-field">
       <mat-label>Vételi ár:</mat-label>
-      <input matInput placeholder="Terméknév" type="number" class="step" formControlName="purchasePrice" required>
+      <input matInput type="number" class="step" formControlName="purchasePrice" required>
       <span matSuffix>Ft</span>
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
     </mat-form-field>
     <mat-form-field appearance="standard" class="form-field">
       <mat-label>Eladási ár:</mat-label>
-      <input matInput placeholder="Terméknév" type="number" class="step" formControlName="sellingPrice" required>
+      <input matInput type="number" class="step" formControlName="sellingPrice" required>
       <span matSuffix>Ft</span>
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
     </mat-form-field>
     <mat-form-field appearance="standard" class="form-field">
       <mat-label>Mennyiség:</mat-label>
-      <input matInput placeholder="Terméknév" type="number" class="qty" formControlName="quantity" required>
+      <input matInput type="number" class="qty" formControlName="quantity" required>
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
     </mat-form-field>
     <mat-form-field appearance="standard" class="form-field">
       <mat-label>Lejárati dátum:</mat-label>
-      <input matInput placeholder="Terméknév" formControlName="expiryDate">
+      <input matInput formControlName="expiryDate">
       <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
     </mat-form-field>
   </div>
   </div>
   <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Mégse</button>
-    <button type="submit" mat-button cdkFocusInitial mat-dialog-close [disabled]="!addItemForm.valid" *ngIf="!isEditing">Hozzáadás</button>
-    <button type="submit" mat-button cdkFocusInitial mat-dialog-close [disabled]="!addItemForm.valid" *ngIf="isEditing">Szerkesztés</button>
+    <button mat-raised-button color="basic" mat-dialog-close>Mégse</button>
+    <button type="submit" mat-raised-button color="primary" cdkFocusInitial mat-dialog-close [disabled]="!addItemForm.valid" 
+    *ngIf="!isEditing">Hozzáadás</button>
+    <button type="submit" mat-raised-button color="primary" cdkFocusInitial mat-dialog-close [disabled]="!addItemForm.valid"
+    *ngIf="isEditing">Szerkesztés</button>
   </div>
 </form>

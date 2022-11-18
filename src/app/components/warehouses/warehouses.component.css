@@ -1,48 +1,90 @@
 table {
-    width: 100%;
-    table-layout: fixed;
+  width: 100%;
+  table-layout: fixed;
 }
 
-tr.example-detail-row {
-    height: 0;
+.spacer {
+  flex: 1 1 auto;
+}
+
+.mat-form-field .searchbar {
+  min-width: 50%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+th.mat-header-cell {
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
+}
+
+.mat-row:nth-child(2n),
+.mat-row:nth-child(4n) {
+  background-color: #FFF;
+}
+
+.mat-row {
+  background-color: #C4CBEE;
+}
+
+.mat-row:nth-child(2n):hover,
+.mat-row:nth-child(4n):hover {
+  background-color: #F2F2F2;
+}
+
+.mat-row:hover {
+  background-color: #B3BCEA;
+}
+
+.mat-row:nth-child(2n):active,
+.mat-row:nth-child(4n):active {
+  background-color: #F2F2F2;
+}
+
+.mat-row:active {
+  background-color: #B3BCEA;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
   }
-  
-  tr.example-element-row:not(.example-expanded-row):hover {
-    background: whitesmoke;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):active {
-    background: #efefef;
-  }
-  
-  .example-element-row td {
-    border-bottom-width: 0;
-  }
-  
-  .example-element-detail {
-    overflow: hidden;
-    display: flex;
-  }
-  
-  .example-element-diagram {
-    min-width: 80px;
-    border: 2px solid black;
-    padding: 8px;
-    font-weight: lighter;
-    margin: 8px 0;
-    height: 104px;
-  }
-  
-  .example-element-symbol {
-    font-weight: bold;
-    font-size: 40px;
-    line-height: normal;
-  }
-  
-  .example-element-description {
-    padding: 16px;
-  }
-  
-  .example-element-description-attribution {
-    opacity: 0.5;
-  }
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}
+
+.overlay {
+  position: absolute;
+  z-index: 1002;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  height: 100%;
+}
+
+.mat-column-edit-button {
+  width: 8%;
+}
+
+.mat-column-delete-button {
+  width: 5%;
+}
+
+.searchbar {
+  width: 30vw;
+}
