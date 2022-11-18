@@ -1,0 +1,19 @@
+input.step::-webkit-outer-spin-button,
+.step::-webkit-inner-spin-button {
+    display: none;
+}
+
+input.step {
+    -moz-appearance: textfield;
+}
+
+mat-form-field {
+    width: 40vw;
+}
+
+::ng-deep .mat-select-panel {
+    min-width: 100% !important;
+    position: relative;
+    top: 90px;
+    left: 40px;
+}

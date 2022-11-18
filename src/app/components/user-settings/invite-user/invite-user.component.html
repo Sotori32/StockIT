@@ -1,29 +1,32 @@
-<h1 mat-dialog-title>Gyártó hozzáadása</h1>
+<h1 mat-dialog-title>Alkalmazott meghívása</h1>
 <form [formGroup]="addInviteForm" (ngSubmit)="onSubmit(addInviteForm.value)" class="form">
   <div mat-dialog-content>
-    <mat-form-field appearance="standard" class="form-field">
-      <mat-label>Meghívott neve:</mat-label>
-      <input matInput placeholder="Terméknév" formControlName="name" required>
-      <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
-    </mat-form-field>
-    <mat-form-field appearance="standard" class="form-field">
-        <mat-label>Meghívott email címe:</mat-label>
-        <input matInput placeholder="Terméknév" formControlName="email" required>
+    <div class="main-wrapper" fxLayout="column" fxLayoutAlign="center start">
+      <mat-form-field appearance="standard" class="form-field">
+        <mat-label>Alkalmazott neve:</mat-label>
+        <input matInput formControlName="name" required>
         <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
-    </mat-form-field>
-    <mat-form-field appearance="standard" class="form-field">
-        <mat-label>Meghívott által kezelhető raktárak:</mat-label>
+      </mat-form-field>
+      <mat-form-field appearance="standard" class="form-field">
+        <mat-label>Alkalmazott email címe:</mat-label>
+        <input matInput formControlName="email" required>
+        <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
+      </mat-form-field>
+      <mat-form-field appearance="standard" class="form-field">
+        <mat-label>Alkalmazott által elérhető raktárak:</mat-label>
         <mat-select formControlName="warehouses" multiple>
-            <mat-optgroup *ngFor="let warehouse of warehouses" [label]="warehouse.name">
-                <mat-option  [value]="{userCanRead: warehouse.ref}">Olvashatja</mat-option>
-                <mat-option  [value]="{userCanWrite: warehouse.ref}">Kezelheti a termékeit</mat-option>
-            </mat-optgroup>
+          <mat-optgroup *ngFor="let warehouse of warehouses" [label]="warehouse.name">
+            <mat-option [value]="{userCanRead: warehouse.ref}">Megtekintheti</mat-option>
+            <mat-option [value]="{userCanWrite: warehouse.ref}">Kezelheti</mat-option>
+          </mat-optgroup>
         </mat-select>
-    <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
-    </mat-form-field>
+        <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->
+      </mat-form-field>
+    </div>
   </div>
   <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Mégse</button>
-    <button type="submit" mat-button cdkFocusInitial mat-dialog-close [disabled]="!addInviteForm.valid">Meghívás</button>
+    <button mat-raised-button color="basic" mat-dialog-close>Mégse</button>
+    <button type="submit" mat-raised-button color="primary" cdkFocusInitial mat-dialog-close
+      [disabled]="!addInviteForm.valid">Meghívás</button>
   </div>
 </form>
