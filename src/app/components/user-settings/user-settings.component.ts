@@ -16,7 +16,9 @@ import { InviteUserComponent } from './invite-user/invite-user.component';
 })
 export class UserSettingsComponent implements OnInit {
 
-  hide = true;
+  hideCurr = true;
+  hideNew = true;
+  hideConf = true;
   isAuthError = false;
 
   constructor(private userService: UserService, private loginService: LoginService, private dialog: MatDialog) { }
@@ -30,14 +32,14 @@ export class UserSettingsComponent implements OnInit {
   displayedColumns = [
     'name',
     'email',
-    'actions'
+    'delete-button'
   ]
 
   displayedColumnsInvite = [
     'name',
     'email',
     'link',
-    'actions'
+    'delete-button'
   ]
 
   ngOnInit(): void {

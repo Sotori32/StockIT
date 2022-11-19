@@ -1,112 +1,129 @@
 <app-header></app-header>
-<div class="main-wrapper" fxLayout="column" fxLayoutAlign="center start">
+<div class="main-wrapper" fxLayout="column" fxLayoutAlign="space-around stretch">
     <mat-card class="box">
-      <mat-card-title>Felhasználói beállítások</mat-card-title>
-    </mat-card>
-    <mat-card>
-        <div>Név: {{user?.name ?? ""}}</div>
-        <div>Email cím: {{user?.email ?? ""}}</div>
-        <div>Tulajdonos: {{user?.isOwner ? "Igen" : "Nem"}}</div>
-    </mat-card>
-    <mat-card>
-        <mat-card-header>Jelszó megváltoztatása</mat-card-header>
-        <mat-card-content>
-            <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword(changePasswordForm.value)" class="form">
-                <mat-form-field appearance="fill" class="form-field">
-                    <mat-label>Jelenlegi jelszó:</mat-label>
-                    <input matInput placeholder = "******" formControlName = "currentPassword" [type]="hide ? 'password' : 'text'" required>
-                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                    <mat-error *ngIf="this.changePasswordForm.get('currentPassword')?.invalid">{{getErrorMessagePassword()}}</mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="fill" class="form-field">
-                    <mat-label>Új jelszó:</mat-label>
-                    <input matInput placeholder = "******" formControlName = "newPassword" [type]="hide ? 'password' : 'text'" required>
-                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                    <mat-error *ngIf="this.changePasswordForm.get('newPassword')?.invalid">{{getErrorMessagePassword()}}</mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="fill" class="form-field">
-                    <mat-label>Új jelszó megerősítése:</mat-label>
-                    <input matInput placeholder = "******" formControlName = "confirmNewPassword" [type]="hide ? 'password' : 'text'" required>
-                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                    <mat-error *ngIf="this.changePasswordForm.get('confirmNewPassword')?.invalid">{{getErrorMessagePassword()}}</mat-error>
-                </mat-form-field>
-                <mat-error *ngIf="changePasswordForm.errors ? changePasswordForm.errors['passwordsNotMatch'] : false">Az új jelszó nem egyezik meg a megerősítéssel.</mat-error>
-                <p class="current-pass-error" *ngIf="isAuthError">Helytelen jelenlegi jelszó.</p>
-                <p class="star-fill">A csillaggal (*) jelölt mezők kitöltése kötelező.</p>
-                <button type="submit" mat-raised-button color="primary" class="btn-block" [disabled]="!changePasswordForm.valid">Jelszó megváltoztatása</button>
-            </form>
-        </mat-card-content>
-    </mat-card>
-    <mat-card class="box" *ngIf="this.user?.isOwner">
-        <mat-card-title>Alkalmazottak kezelése</mat-card-title>
-        <mat-card-content class="box">
-            <mat-card-content>
-              <button mat-button (click)="openInviteUserDialog()">Hozzáadás</button>
+        <mat-card-title>Felhasználói beállítások</mat-card-title>
+        <div class="section-wrapper" fxLayout="row" fxLayoutAlign="space-between stretch">
+            <div class="content-wrapper-personal">
+            <mat-card-title>Felhasználó adatai</mat-card-title>
+            <mat-card-content class="personal-info-wrapper">
+                <div class="personal-info">Név: {{user?.name ?? ""}}</div>
+                <div class="personal-info">Email cím: {{user?.email ?? ""}}</div>
+                <div class="personal-info">Tulajdonos: {{user?.isOwner ? "Igen" : "Nem"}}</div>
             </mat-card-content>
-        </mat-card-content>
-        <mat-card-content>
-            <table mat-table [dataSource]="users" class="mat-elevation-z8">
-    
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef> Név </th>
-                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                </ng-container>
-    
-                <ng-container matColumnDef="email">
+            </div>
+            <div class="content-wrapper" fxFlex="50">
+            <mat-card-title>Jelszó megváltoztatása</mat-card-title>
+            <mat-card-content>
+                
+                <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword(changePasswordForm.value)" class="form">
+                    <div class="form-wrapper" fxLayout="column" fxLayoutAlign="space-between start">
+                        <div class="form-field-wrapper">
+                    <mat-form-field appearance="standard" class="form-field">
+                        <mat-label>Jelenlegi jelszó:</mat-label>
+                            <input matInput placeholder="******" formControlName="currentPassword" [type]="hideCurr ? 'password' : 'text'" required>
+                        <button type="button" mat-icon-button matSuffix (click)="hideCurr = !hideCurr" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideCurr">
+                            <mat-icon>{{hideCurr ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="this.changePasswordForm.get('currentPassword')?.invalid">{{getErrorMessagePassword()}}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="standard" class="form-field">
+                        <mat-label>Új jelszó:</mat-label>
+                            <input matInput placeholder="******" formControlName="newPassword" [type]="hideNew ? 'password' : 'text'" required>
+                        <button type="button" mat-icon-button matSuffix (click)="hideNew = !hideNew" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideNew">
+                            <mat-icon>{{hideNew ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="this.changePasswordForm.get('newPassword')?.invalid">{{getErrorMessagePassword()}}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="standard" class="form-field">
+                        <mat-label>Új jelszó megerősítése:</mat-label>
+                            <input matInput placeholder="******" formControlName="confirmNewPassword" [type]="hideConf ? 'password' : 'text'" required>
+                        <button type="button" mat-icon-button matSuffix (click)="hideConf = !hideConf" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConf">
+                            <mat-icon>{{hideConf ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="this.changePasswordForm.get('confirmNewPassword')?.invalid">{{getErrorMessagePassword()}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                    <mat-error *ngIf="changePasswordForm.errors ? changePasswordForm.errors['passwordsNotMatch'] : false" class="pass-match-error">Az új
+                        jelszó nem egyezik meg a megerősítéssel.</mat-error>
+                    <p class="current-pass-error" *ngIf="isAuthError">Helytelen jelenlegi jelszó.</p>
+                    <p class="star-fill">A csillaggal (*) jelölt mezők kitöltése kötelező.</p>
+                    <button type="submit" mat-raised-button color="primary" class="btn-block"
+                        [disabled]="!changePasswordForm.valid">Jelszó megváltoztatása</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </div>
+        </div>
+    </mat-card>
+    <mat-card class="box">
+        <div class="section-wrapper" fxLayout="column" fxLayoutAlign="space-between start">
+            <div *ngIf="this.user?.isOwner" class="content-wrapper-users">
+                <mat-card-title>Alkalmazottak kezelése</mat-card-title>
+                <mat-card-content class="box">
+                <mat-card-content class="add-button" fxLayoutAlign="end center">
+                    <button mat-raised-button color="primary" (click)="openInviteUserDialog()">Hozzáadás</button>
+                </mat-card-content>
+                </mat-card-content>
+                <mat-card-content>
+                <table mat-table [dataSource]="users" class="users-table">
+
+                    <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Név </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="email">
                     <th mat-header-cell *matHeaderCellDef> E-mail </th>
                     <td mat-cell *matCellDef="let element"> {{element.mail}} </td>
-                </ng-container>
+                    </ng-container>
 
-                <ng-container matColumnDef="actions">
+                    <ng-container matColumnDef="delete-button">
                     <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
                     <td mat-cell *matCellDef="let element">
-                      <button mat-raised-button color="warn" (click)="deleteUser(element.documentId)">Törlés</button>
+                        <button mat-raised-button color="warn" (click)="deleteUser(element.documentId)">Törlés</button>
                     </td>
-                  </ng-container>
-              
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
-              
-        </mat-card-content>
-    </mat-card>
-    <mat-card class="box" *ngIf="this.user?.isOwner && this.invites.length > 0">
-        <mat-card-title>Meghívók kezelése</mat-card-title>
-        <mat-card-content>
-            <table mat-table [dataSource]="invites" class="mat-elevation-z8">
-    
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef> Név </th>
-                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                </ng-container>
-    
-                <ng-container matColumnDef="email">
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                </mat-card-content>
+            </div>
+            <div *ngIf="this.user?.isOwner && this.invites.length > 0" class="content-wrapper-invites">
+                <mat-card-title>Meghívók kezelése</mat-card-title>
+                <mat-card-content>
+                <table mat-table [dataSource]="invites" class="invites-table">
+
+                    <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Név </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="email">
                     <th mat-header-cell *matHeaderCellDef> E-mail </th>
                     <td mat-cell *matCellDef="let element"> {{element.mail}} </td>
-                </ng-container>
+                    </ng-container>
 
-                <ng-container matColumnDef="link">
+                    <ng-container matColumnDef="link">
                     <th mat-header-cell *matHeaderCellDef> Link </th>
                     <td mat-cell *matCellDef="let element"> {{element.link}} </td>
-                </ng-container>
+                    </ng-container>
 
-                <ng-container matColumnDef="actions">
+                    <ng-container matColumnDef="delete-button">
                     <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
                     <td mat-cell *matCellDef="let element">
-                      <button mat-raised-button color="warn" (click)="deleteInvite(element.id)">Törlés</button>
+                        <button mat-raised-button color="warn" (click)="deleteInvite(element.id)">Törlés</button>
                     </td>
-                  </ng-container>
-              
-                <tr mat-header-row *matHeaderRowDef="displayedColumnsInvite"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumnsInvite;"></tr>
-              </table>
-              
-        </mat-card-content>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsInvite"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsInvite;"></tr>
+                </table>
+                </mat-card-content>
+            </div>
+        </div>
     </mat-card>
 </div>

@@ -109,3 +109,7 @@ th.mat-header-cell {
 .searchbar {
   width: 30vw;
 }
+
+.main-wrapper {
+  margin: 15px;
+}
