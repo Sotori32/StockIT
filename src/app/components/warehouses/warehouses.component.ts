@@ -2,7 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+import { UserModel } from 'src/app/models/user.model';
 import { WarehouseDisplayModel } from 'src/app/models/warehouse.model';
+import { UserService } from 'src/app/services/user/user.service';
 import { WarehouseService } from 'src/app/services/warehouse/warehouse.service';
 import { AddWarehouseComponent } from './add-warehouses/add-warehouses.component';
 
@@ -16,6 +18,7 @@ export class WarehousesComponent implements OnInit, OnDestroy {
   private subs: Subscription = new Subscription();
 
   public loading = false;
+  public user?: UserModel; 
 
   public displayedColumns: string[] = [
     'name',
@@ -28,11 +31,14 @@ export class WarehousesComponent implements OnInit, OnDestroy {
 
   public warehouses = new MatTableDataSource<WarehouseDisplayModel>([]);
 
-  constructor(public warehouseService: WarehouseService, private dialog: MatDialog) { }
+  constructor(public warehouseService: WarehouseService, private dialog: MatDialog, private userService: UserService) { }
 
 
   ngOnInit(): void {
     this.loading = true;
+    this.subs.add(this.userService.getUserInfoSync().subscribe(user => {
+      this.user = user.payload.doc.data()
+    }))
     this.subs.add(this.warehouseService.getAllWarehousesInOrganizationSync()
       .subscribe(warehouses => {
         this.loading = false;

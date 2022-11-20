@@ -54,7 +54,7 @@ export class AddItemComponent implements OnInit, OnDestroy {
       this.manufacturers = this.getAllManufacturers()
     }))
     
-    this.sub.add(this.warehouseService.getAllWarehousesInOrganization().subscribe((warehouses) => {
+    this.sub.add(this.warehouseService.getAllWriteableWarehouses().subscribe((warehouses) => {
       warehouses.forEach(w => { this.selectableWarehouses.set(w.id, { name: w.data()?.name ?? "", ref: w.ref }) })
       this.warehouses = this.getAllWarehouses()
     }))

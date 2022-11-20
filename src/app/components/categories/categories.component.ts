@@ -4,7 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { timeStamp } from 'console';
 import { Subscription } from 'rxjs';
 import { CategoryDisplayModel, CategoryModel } from 'src/app/models/category.model';
+import { UserModel } from 'src/app/models/user.model';
 import { CategoryService } from 'src/app/services/category/category.service';
+import { UserService } from 'src/app/services/user/user.service';
 import { AddCategoryComponent } from './add-category/add-category.component';
 
 @Component({
@@ -17,6 +19,8 @@ export class CategoriesComponent implements OnInit {
   private subs: Subscription = new Subscription();
 
   public loading = false;
+
+  public user?: UserModel;
   
   displayedColumns: string[] = [
     'name',
@@ -26,10 +30,13 @@ export class CategoriesComponent implements OnInit {
   
   public categories = new MatTableDataSource<CategoryDisplayModel>([]);
   
-  constructor(private categoryService: CategoryService, private dialog: MatDialog) { }
+  constructor(private categoryService: CategoryService, private dialog: MatDialog, private userService: UserService) { }
   
   ngOnInit(): void {
     this.loading = true;
+    this.subs.add(this.userService.getUserInfoSync().subscribe(user => {
+      this.user = user.payload.doc.data()
+    }))
     this.subs.add(this.categoryService.getAllOrganizationCategoriesSync()
       .subscribe(categories => {
         this.loading = false;

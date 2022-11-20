@@ -8,12 +8,12 @@
             <mat-card-content>
                 <mat-form-field appearance="fill" class="form-field">
                     <mat-label>Név:</mat-label>
-                    <input matInput placeholder = "Minta Pál" formControlName = "name" required>
+                    <input matInput placeholder = "Minta Pál" formControlName = "name" required [attr.disabled]="!!inviteInfo">
                     <mat-error *ngIf="this.signupForm.get('name')?.invalid">{{getErrorMessageName()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="form-field">
                     <mat-label>Email cím:</mat-label>
-                    <input matInput placeholder = "minta@email.com" formControlName = "email" required>
+                    <input matInput placeholder = "minta@email.com" formControlName = "email" required [attr.disabled]="!!inviteInfo">
                     <mat-error *ngIf="this.signupForm.get('email')?.invalid">{{getErrorMessageEmail()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="form-field">

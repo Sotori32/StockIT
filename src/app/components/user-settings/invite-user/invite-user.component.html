@@ -16,8 +16,8 @@
         <mat-label>Alkalmazott által elérhető raktárak:</mat-label>
         <mat-select formControlName="warehouses" multiple>
           <mat-optgroup *ngFor="let warehouse of warehouses" [label]="warehouse.name">
-            <mat-option [value]="{userCanRead: warehouse.ref}">Megtekintheti</mat-option>
-            <mat-option [value]="{userCanWrite: warehouse.ref}">Kezelheti</mat-option>
+            <mat-option [value]="warehouse.selectedCanReadId">Megtekintheti</mat-option>
+            <mat-option [value]="warehouse.selectedCanWriteId">Kezelheti</mat-option>
           </mat-optgroup>
         </mat-select>
         <!--<mat-error *ngIf="this.addForm.get('itemName')?.invalid">{{getErrorMessageEmail()}}</mat-error>-->

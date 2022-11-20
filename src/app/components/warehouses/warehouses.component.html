@@ -15,7 +15,7 @@
       <span class="spacer"></span>
 
       <mat-card-content>
-        <button mat-raised-button color="primary" (click)="addWarehouse()">Hozzáadás</button>
+        <button mat-raised-button color="primary" [disabled]="!user?.isOwner" (click)="addWarehouse()">Hozzáadás</button>
       </mat-card-content>
     </div>
 
@@ -46,14 +46,14 @@
         <ng-container matColumnDef="edit-button">
           <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
           <td mat-cell *matCellDef="let element">
-            <button mat-raised-button color="basic" (click)="editWarehouse(element)">Szerkesztés</button>
+            <button mat-raised-button color="basic" (click)="editWarehouse(element)" [disabled]="!user?.isOwner">Szerkesztés</button>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="delete-button">
           <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
           <td mat-cell *matCellDef="let element">
-            <button mat-raised-button color="warn" (click)="deleteWarehouse(element.id)">Törlés</button>
+            <button mat-raised-button color="warn" (click)="deleteWarehouse(element.id)" [disabled]="!user?.isOwner">Törlés</button>
           </td>
         </ng-container>
 

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { DocumentReference } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter, mergeMap, Subscription } from 'rxjs';
+import { InviteModel } from 'src/app/models/invite.model';
 import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
@@ -14,14 +16,24 @@ export class SignupComponent implements OnInit {
   private subs: Subscription = new Subscription();
 
   hide = true;
+  inviteInfo?: InviteModel & {ref: DocumentReference<InviteModel>}
 
-  constructor(private loginService: LoginService, private auth: AngularFireAuth, private router: Router) {
+  constructor(private loginService: LoginService, private auth: AngularFireAuth, private router: Router, private route: ActivatedRoute) {
   }
   
   ngOnInit(): void {
     this.subs.add(this.auth.authState.subscribe((user) => {
       if (user) {this.router.navigate(['/'])}
     }));
+
+    this.subs.add(this.route.queryParams.pipe(filter(qp => qp['invite']), mergeMap(p => {
+      const inviteCode = p['invite'];
+      return this.loginService.getInviteInfo(inviteCode)
+    })).subscribe(inf => {
+      this.inviteInfo = {...inf.data()!, ref: inf.ref};
+      this.signupForm.controls.email.setValue(this.inviteInfo?.email ?? "");
+      this.signupForm.controls.name.setValue(this.inviteInfo?.name ?? "");
+    }))
   }
   
   ngOnDestroy(): void {
@@ -63,6 +75,11 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(value: Partial<{ name: string | null, email: string | null, password: string | null }>) {
+    debugger;
+    if (!!this.inviteInfo) {
+      this.loginService.registerBasicUser(this.inviteInfo, value.password ?? "")
+      return
+    }
     this.loginService.register(value.name ?? "", value.email ?? "", value.password ?? "");   
   }
 

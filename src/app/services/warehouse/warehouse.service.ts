@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, DocumentReference } from '@angular/fire/compat/firestore';
 import { combineLatest, filter, first, mergeMap } from 'rxjs';
 import { ItemCollectionPath, ItemModel } from 'src/app/models/item.model';
 import { OrganizationCollectionPath, OrganizationModel } from 'src/app/models/organization.model';
@@ -23,6 +23,12 @@ export class WarehouseService {
   public getAllWarehousesInOrganizationSync() {
     return this.auth.user.pipe(filter(user => !!user), mergeMap(user => {
       return this.store.collection<WarehouseModel>(WarehouseCollectionPath, ref => ref.where('userCanRead', 'array-contains', user!.uid)).snapshotChanges()
+    }))
+  }
+
+  public getAllWriteableWarehouses() {
+    return this.auth.user.pipe(filter(user => !!user), mergeMap(user => {
+      return this.store.collection<WarehouseModel>(WarehouseCollectionPath).ref.where('userCanWrite', 'array-contains', user!.uid).get()
     }))
   }
 
@@ -59,5 +65,15 @@ export class WarehouseService {
   
   public editWarehouse(id: string, warehouse: WarehouseModel) {
     this.store.doc<WarehouseModel>(WarehouseCollectionPath + "/" + id).update(warehouse)
+  }
+
+  public addUserToWarehouse(ref: DocumentReference<WarehouseModel>, uid: string, isAddingToUserCanRead: boolean) {
+    this.store.doc<WarehouseModel>(ref).get().pipe(first()).subscribe(w => {
+      if (isAddingToUserCanRead) {
+        this.store.doc<WarehouseModel>(ref).update({userCanRead: [...w.data()?.userCanRead!, uid]})
+      } else {
+        this.store.doc<WarehouseModel>(ref).update({userCanWrite: [...w.data()?.userCanWrite!, uid]})
+      }
+    })
   }
 }
