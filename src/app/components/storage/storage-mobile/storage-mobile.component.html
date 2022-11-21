@@ -1,0 +1,18 @@
+<!--<ul>
+    <li *ngFor="let item of items">
+        {{item.name}}
+    </li>
+    <li *ngFor="let item of items">
+        {{item.name}}
+    </li>
+</ul>-->
+
+<table>
+    <thead>
+        <th>Név</th>
+        <th>SKU</th>
+    </thead>
+    <tbody>
+        <td *ngFor="let item of items">{{item.name}}</td>
+    </tbody>
+</table>

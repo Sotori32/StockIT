@@ -42,16 +42,16 @@ export class StorageComponent implements OnInit, OnDestroy, AfterViewInit {
     'expiryDate'
   ];
 
-  columnsToDisplayWithExpand = [
-    ...this.columnsToDisplay,
-    'expand',
-  ];
-
   columnsToDisplayWithButtons = [
-    ...this.columnsToDisplayWithExpand,
+    ...this.columnsToDisplay,
     'edit-button',
     'delete-button',
-  ]
+  ];
+  
+  columnsToDisplayWithExpand = [
+    ...this.columnsToDisplayWithButtons,
+    'expand',
+  ];
 
   expandedElement: ItemDisplayModel | null = null;
 

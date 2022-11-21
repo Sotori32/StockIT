@@ -25,48 +25,37 @@
         matSortDirection="asc" matSortDisableClear="true" [class.spinner]="loading">
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Név</th>
-          <td mat-cell *matCellDef="let item">{{item.name}}</td>
+          <td mat-cell *matCellDef="let item" data-label="Név">{{item.name}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sku">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Leltári szám</th>
-          <td mat-cell *matCellDef="let item">{{item.sku}}</td>
+          <td mat-cell *matCellDef="let item" data-label="Leltári szám">{{item.sku}}</td>
         </ng-container>
 
         <ng-container matColumnDef="categories">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Kategória</th>
-          <td mat-cell *matCellDef="let item">{{getNameFromCategories(item.categories)}}</td>
+          <td mat-cell *matCellDef="let item" data-label="Kategória">{{getNameFromCategories(item.categories)}}</td>
         </ng-container>
 
         <ng-container matColumnDef="warehouse">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Raktár</th>
-          <td mat-cell *matCellDef="let item">{{item.warehouse.name}}</td>
+          <td mat-cell *matCellDef="let item" data-label="Raktár">{{item.warehouse.name}}</td>
         </ng-container>
 
         <ng-container matColumnDef="manufacturer">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Gyártó</th>
-          <td mat-cell *matCellDef="let item">{{getNameFromManufacturer(item.manufacturer)}}</td>
+          <td mat-cell *matCellDef="let item" data-label="Gyártó">{{getNameFromManufacturer(item.manufacturer)}}</td>
         </ng-container>
 
         <ng-container matColumnDef="qty">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Mennyiség</th>
-          <td mat-cell *matCellDef="let item">{{item.qty}} db</td>
+          <td mat-cell *matCellDef="let item" data-label="Mennyiség">{{item.qty}} db</td>
         </ng-container>
 
         <ng-container matColumnDef="expiryDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Lejárati dátum</th>
-          <td mat-cell *matCellDef="let item">{{item.expiryDate}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="expand">
-          <th mat-header-cell *matHeaderCellDef aria-label="row expand">&nbsp;</th>
-          <td mat-cell *matCellDef="let element">
-            <button mat-icon-button aria-label="expand row"
-              (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
-              <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
-              <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
-            </button>
-          </td>
+          <td mat-cell *matCellDef="let item" data-label="Lejárati dátum">{{item.expiryDate}}</td>
         </ng-container>
 
         <ng-container matColumnDef="edit-button">
@@ -83,21 +72,32 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="expand">
+          <th mat-header-cell *matHeaderCellDef aria-label="row expand">&nbsp;</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button aria-label="expand row"
+              (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+              <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+              <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
         <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
         <ng-container matColumnDef="expandedDetail">
-          <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithButtons.length">
+          <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
             <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
-              <div class="element-description">{{element.upc}}</div>
-              <div class="element-description">{{element.summary}} </div>
-              <div class="element-description">{{element.purchasePrice}} Ft</div>
-              <div class="element-description">{{element.sellingPrice}} Ft</div>
+              <div class="element-description">Vonalkód: {{element.upc}}</div>
+              <div class="element-description">Leírás: {{element.summary}} </div>
+              <div class="element-description">Vételi ár: {{element.purchasePrice}} Ft</div>
+              <div class="element-description">Eladási ár: {{element.sellingPrice}} Ft</div>
             </div>
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithButtons; sticky: true"></tr>
-        <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithButtons;" class="element-row"
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand; sticky: true"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="element-row"
           [class.example-expanded-row]="expandedElement === element">
         </tr>
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
