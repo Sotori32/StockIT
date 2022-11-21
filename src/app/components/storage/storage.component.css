@@ -28,14 +28,6 @@ tr.detail-row {
   display: flex;
 }
 
-.element-description {
-  padding: 16px;
-}
-
-.element-description-attribution {
-  opacity: 0.5;
-}
-
   tr.element-row:not(.expanded-row):nth-child(2n+1):hover {
     background: #F2F2F2;
   }
@@ -110,6 +102,9 @@ tr.detail-row {
     width: 3%;
   }
   
+  .element-detail > div {
+    padding: 15px;
+  }
 }
 
 .searchbar {
@@ -265,5 +260,17 @@ tr.detail-row {
   .mat-table .mat-header-row {
     border-bottom: 2px solid black;
     border-top: 2px solid black;
+  }
+
+  .mat-table .mat-row td.mat-column-expandedDetail {
+    grid-template-columns: none !important; 
+  }
+
+  .element-detail > div {
+    padding: 15px;
+  }
+
+  .element-detail > .element-description {
+    max-width: 30vw;
   }
 }
