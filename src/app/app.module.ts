@@ -42,7 +42,6 @@ import { AddManufacturersComponent } from './components/manufacturers/add-manufa
 import { AddWarehouseComponent } from './components/warehouses/add-warehouses/add-warehouses.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { InviteUserComponent } from './components/user-settings/invite-user/invite-user.component';
-import { StorageMobileComponent } from './components/storage/storage-mobile/storage-mobile.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +60,6 @@ import { StorageMobileComponent } from './components/storage/storage-mobile/stor
     AddWarehouseComponent,
     UserSettingsComponent,
     InviteUserComponent,
-    StorageMobileComponent,
   ],
   imports: [
     BrowserModule,
