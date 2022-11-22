@@ -130,7 +130,7 @@ tr.element-row:not(.expanded-row):nth-child(4n+1):active {
 
 @media screen and (min-width: 850px) and (max-width: 1320px) {
   .mat-column-edit-button button.icon {
-    display: contents;
+    display: unset;
   }
 
   .mat-column-edit-button button.text {
@@ -138,7 +138,7 @@ tr.element-row:not(.expanded-row):nth-child(4n+1):active {
   }
 
   .mat-column-delete-button button.icon {
-    display: contents;
+    display: unset;
   }
 
   .mat-column-delete-button button.text {

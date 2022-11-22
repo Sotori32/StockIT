@@ -3,7 +3,7 @@
       <span class="title"><nav><a routerLink="" routerLinkActive="active" ariaCurrentWhenActive="page"><span class="title-stock">Stock</span><span class="title-it">IT</span></a></nav></span>
       <span class="spacer"></span>
       <button mat-button (click)="goToPage('/user-settings')" class="label user-text">Felhasználói fiók</button>
-      <button mat-icon-button (click)="goToPage('/user-settings')" class="label user-icon">
+      <button mat-icon-button type="button" (click)="goToPage('/user-settings')" class="label user-icon">
         <mat-icon>person</mat-icon>
       </button>
       <button mat-button class="label settings-text" [matMenuTriggerFor]="settings">Beállítások</button>

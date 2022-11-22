@@ -40,12 +40,12 @@ mat-toolbar-row button.logout-icon {
 }
 
 @media screen and (max-width: 590px) {
-    mat-toolbar-row button.label mat-icon {
+    mat-toolbar-row button.label {
         margin-left: 20px;
     }
     
     mat-toolbar .mat-toolbar-row button.user-icon {
-        display: contents;
+        display: unset;
     }
 
     mat-toolbar .mat-toolbar-row button.user-text {
@@ -53,7 +53,7 @@ mat-toolbar-row button.logout-icon {
     }
 
     mat-toolbar .mat-toolbar-row button.settings-icon {
-        display: contents;
+        display: unset;
     }
 
     mat-toolbar .mat-toolbar-row button.settings-text {
@@ -61,7 +61,7 @@ mat-toolbar-row button.logout-icon {
     }
 
     mat-toolbar .mat-toolbar-row button.logout-icon {
-        display: contents;
+        display: unset;
     }
 
     mat-toolbar .mat-toolbar-row button.logout-text {

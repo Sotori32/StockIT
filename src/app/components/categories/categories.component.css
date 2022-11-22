@@ -106,7 +106,7 @@ th.mat-header-cell {
 
 @media screen and (min-width: 850px) and (max-width: 1190px) {
   .mat-column-edit-button button.icon {
-    display: contents;
+    display: unset;
   }
 
   .mat-column-edit-button button.text {
@@ -114,7 +114,7 @@ th.mat-header-cell {
   }
 
   .mat-column-delete-button button.icon {
-    display: contents;
+    display: unset;
   }
 
   .mat-column-delete-button button.text {
