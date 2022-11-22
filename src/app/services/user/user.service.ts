@@ -58,7 +58,6 @@ export class UserService {
 
   createInvite(name: string, email: string, userCanRead: DocumentReference<WarehouseModel>[], userCanWrite: DocumentReference<WarehouseModel>[]) {
     return this.organizationService.getUserOrganization().pipe(mergeMap(org => {
-      debugger;
       return this.store.collection<InviteModel>(InviteCollectionPath).add({name, email, userCanRead, userCanWrite, organization: org.ref})
     }))
   }

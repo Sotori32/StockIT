@@ -72,7 +72,6 @@ export class InviteUserComponent implements OnInit {
   }
 
   public onSubmit(value: Partial<{name: string | null, email: string | null, warehouses: string[] | null}>) {
-    debugger
 
     this.userService.createInvite(value.name!, value.email!, this.getCanReadFromWarehouseMap(value.warehouses ?? []).map(w => w.ref), this.getCanWriteFromWarehouseMap(value.warehouses ?? []).map(w => w.ref)).pipe(first()).subscribe()
   }

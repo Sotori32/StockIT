@@ -75,7 +75,6 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(value: Partial<{ name: string | null, email: string | null, password: string | null }>) {
-    debugger;
     if (!!this.inviteInfo) {
       this.loginService.registerBasicUser(this.inviteInfo, value.password ?? "")
       return

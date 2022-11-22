@@ -21,6 +21,8 @@ export class UserSettingsComponent implements OnInit {
   hideConf = true;
   isAuthError = false;
 
+  public loading = false;
+
   constructor(private userService: UserService, private loginService: LoginService, private dialog: MatDialog) { }
 
   public subs: Subscription = new Subscription();
@@ -43,6 +45,7 @@ export class UserSettingsComponent implements OnInit {
   ]
 
   ngOnInit(): void {
+    this.loading = true;
     this.subs.add(this.userService.getUserInfoSync().subscribe(user => {
       this.user = user.payload.doc.data()
     }))
@@ -63,6 +66,7 @@ export class UserSettingsComponent implements OnInit {
     }))
 
     this.subs.add(this.userService.getInvitesSync().subscribe(invites => {
+      this.loading = false;
       this.invites = invites.map(invite => {
         const inviteData = invite.payload.doc.data()
 
@@ -104,7 +108,6 @@ export class UserSettingsComponent implements OnInit {
       } catch (error) {
         console.log(error)
         this.isAuthError = true;
-        debugger; 
       }
     }
   }

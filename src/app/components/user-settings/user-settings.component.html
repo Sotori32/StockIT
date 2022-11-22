@@ -67,17 +67,18 @@
                     <button mat-raised-button color="primary" (click)="openInviteUserDialog()">Hozzáadás</button>
                 </mat-card-content>
                 </mat-card-content>
+                <div class="overlay" *ngIf="loading"></div>
                 <mat-card-content>
                 <table mat-table [dataSource]="users" class="users-table">
 
                     <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef> Név </th>
-                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    <td mat-cell *matCellDef="let element" data-label="Név"> {{element.name}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="email">
                     <th mat-header-cell *matHeaderCellDef> E-mail </th>
-                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                    <td mat-cell *matCellDef="let element" data-label="Email"> {{element.email}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="delete-button">
@@ -94,22 +95,23 @@
             </div>
             <div *ngIf="this.user?.isOwner && this.invites.length > 0" class="content-wrapper-invites">
                 <mat-card-title>Meghívók kezelése</mat-card-title>
+                <div class="overlay" *ngIf="loading"></div>
                 <mat-card-content>
                 <table mat-table [dataSource]="invites" class="invites-table">
 
                     <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef> Név </th>
-                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    <td mat-cell *matCellDef="let element" data-label="Név"> {{element.name}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="email">
                     <th mat-header-cell *matHeaderCellDef> E-mail </th>
-                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                    <td mat-cell *matCellDef="let element" data-label="Email"> {{element.email}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="link">
                     <th mat-header-cell *matHeaderCellDef> Link </th>
-                    <td mat-cell *matCellDef="let element"> {{element.link}} </td>
+                    <td mat-cell *matCellDef="let element" data-label="Link"> {{element.link}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="delete-button">
