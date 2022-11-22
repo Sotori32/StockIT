@@ -25,35 +25,41 @@
 
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> Név </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          <td mat-cell *matCellDef="let element" data-label="Név"> {{element.name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="address">
           <th mat-header-cell *matHeaderCellDef> Cím </th>
-          <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+          <td mat-cell *matCellDef="let element" data-label="Cím"> {{element.address}} </td>
         </ng-container>
 
         <ng-container matColumnDef="place">
           <th mat-header-cell *matHeaderCellDef> Helység </th>
-          <td mat-cell *matCellDef="let element"> {{element.place}} </td>
+          <td mat-cell *matCellDef="let element" data-label="Helység"> {{element.place}} </td>
         </ng-container>
 
         <ng-container matColumnDef="postcode">
           <th mat-header-cell *matHeaderCellDef> Irányítószám </th>
-          <td mat-cell *matCellDef="let element"> {{element.postcode}} </td>
+          <td mat-cell *matCellDef="let element" data-label="Irányítószám"> {{element.postcode}} </td>
         </ng-container>
 
         <ng-container matColumnDef="edit-button">
-          <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+          <th mat-header-cell *matHeaderCellDef aria-label="edit warehouse">&nbsp;</th>
           <td mat-cell *matCellDef="let element">
-            <button mat-raised-button color="basic" (click)="editWarehouse(element)" [disabled]="!user?.isOwner">Szerkesztés</button>
+            <button class="text" mat-raised-button color="basic" (click)="editWarehouse(element)" [disabled]="!user?.isOwner">Szerkesztés</button>
+            <button class="icon" mat-icon-button color="basic" (click)="editWarehouse(element)" [disabled]="!user?.isOwner">
+              <mat-icon>edit</mat-icon>
+            </button>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="delete-button">
-          <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+          <th mat-header-cell *matHeaderCellDef aria-label="delete warehouse">&nbsp;</th>
           <td mat-cell *matCellDef="let element">
-            <button mat-raised-button color="warn" (click)="deleteWarehouse(element.id)" [disabled]="!user?.isOwner">Törlés</button>
+            <button class="text" mat-raised-button color="warn" (click)="deleteWarehouse(element.id)" [disabled]="!user?.isOwner">Törlés</button>
+            <button class="icon" mat-icon-button color="warn" (click)="deleteWarehouse(element.id)" [disabled]="!user?.isOwner">
+              <mat-icon>delete</mat-icon>
+            </button>
           </td>
         </ng-container>
 

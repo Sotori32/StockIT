@@ -4,6 +4,7 @@ input.step::-webkit-outer-spin-button,
 }
 
 input.step {
+    appearance: textfield;
     -moz-appearance: textfield;
 }
 

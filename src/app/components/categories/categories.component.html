@@ -24,21 +24,27 @@
       <table mat-table [dataSource]="categories" [class.spinner]="loading">
 
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>Név</th>
+          <th mat-header-cell *matHeaderCellDef>Kategória neve</th>
           <td mat-cell *matCellDef="let element">{{element.name}}</td>
         </ng-container>
 
         <ng-container matColumnDef="edit-button">
-          <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+          <th mat-header-cell *matHeaderCellDef aria-label="edit category">&nbsp;</th>
           <td mat-cell *matCellDef="let element">
-            <button mat-raised-button color="basic" [disabled]="!user?.isOwner" (click)="editCategory(element)">Szerkesztés</button>
+            <button class="text" mat-raised-button color="basic" [disabled]="!user?.isOwner" (click)="editCategory(element)">Szerkesztés</button>
+            <button class="icon" mat-icon-button color="basic" [disabled]="!user?.isOwner" (click)="editCategory(element)">
+              <mat-icon>edit</mat-icon>
+            </button>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="delete-button">
-          <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+          <th mat-header-cell *matHeaderCellDef aria-label="delete category">&nbsp;</th>
           <td mat-cell *matCellDef="let element">
-            <button mat-raised-button color="warn" [disabled]="!user?.isOwner" (click)="deleteCategory(element.id)">Törlés</button>
+            <button class="text" mat-raised-button color="warn" [disabled]="!user?.isOwner" (click)="deleteCategory(element.id)">Törlés</button>
+            <button class="icon" mat-icon-button color="warn" [disabled]="!user?.isOwner" (click)="deleteCategory(element.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </td>
         </ng-container>
 

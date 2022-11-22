@@ -2,14 +2,23 @@
     <mat-toolbar-row>
       <span class="title"><nav><a routerLink="" routerLinkActive="active" ariaCurrentWhenActive="page"><span class="title-stock">Stock</span><span class="title-it">IT</span></a></nav></span>
       <span class="spacer"></span>
-      <button mat-button (click)="goToPage('/user-settings')" class="label">Felhasználói fiók</button>
-      <button mat-button class="label" [matMenuTriggerFor]="settings">Beállítások</button>
+      <button mat-button (click)="goToPage('/user-settings')" class="label user-text">Felhasználói fiók</button>
+      <button mat-icon-button (click)="goToPage('/user-settings')" class="label user-icon">
+        <mat-icon>person</mat-icon>
+      </button>
+      <button mat-button class="label settings-text" [matMenuTriggerFor]="settings">Beállítások</button>
+      <button mat-icon-button class="label settings-icon" [matMenuTriggerFor]="settings">
+        <mat-icon>settings</mat-icon>
+      </button>
       <mat-menu #settings="matMenu">
         <button mat-menu-item (click)="goToPage('/warehouses')">Raktárak</button>
         <button mat-menu-item (click)="goToPage('/categories')">Kategóriák</button>
         <button mat-menu-item (click)="goToPage('/manufacturers')">Gyártók</button>
       </mat-menu>
-      <button mat-button class="label" (click)="logout()">Kijelentkezés</button>
+      <button mat-button class="label logout-text" (click)="logout()">Kijelentkezés</button>
+      <button mat-icon-button class="label logout-icon" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
     </mat-toolbar-row>
   </mat-toolbar>
   <mat-divider></mat-divider>

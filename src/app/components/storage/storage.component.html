@@ -59,16 +59,22 @@
         </ng-container>
 
         <ng-container matColumnDef="edit-button">
-          <th mat-header-cell *matHeaderCellDef aria-label="row buttons">&nbsp;</th>
+          <th mat-header-cell *matHeaderCellDef aria-label="edit item">&nbsp;</th>
           <td mat-cell *matCellDef="let element" class="edit-button">
-            <button mat-raised-button color="basic" (click)="editItem(element)">Szerkesztés</button>
+            <button class="text" mat-raised-button color="basic" (click)="editItem(element)">Szerkesztés</button>
+            <button class="icon" mat-icon-button color="basic" (click)="editItem(element)">
+              <mat-icon>edit</mat-icon>
+            </button>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="delete-button">
-          <th mat-header-cell *matHeaderCellDef aria-label="row buttons">&nbsp;</th>
+          <th mat-header-cell *matHeaderCellDef aria-label="delete item">&nbsp;</th>
           <td mat-cell *matCellDef="let element" class="delete-button">
-            <button mat-raised-button color="warn" (click)="deleteItem(element.id)">Törlés</button>
+            <button class="text" mat-raised-button color="warn" (click)="deleteItem(element.id)">Törlés</button>
+            <button class="icon" mat-icon-button color="warn" (click)="deleteItem(element.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </td>
         </ng-container>
 

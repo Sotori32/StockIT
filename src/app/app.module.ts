@@ -32,7 +32,6 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './services/auth.guard';
 import { StorageComponent } from './components/storage/storage.component';
 import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { AddItemComponent } from './components/storage/add-item/add-item.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { ManufacturersComponent } from './components/manufacturers/manufacturers.component';
@@ -50,7 +49,6 @@ import { InviteUserComponent } from './components/user-settings/invite-user/invi
     LoginComponent,
     StorageComponent,
     HeaderComponent,
-    FooterComponent,
     AddItemComponent,
     CategoriesComponent,
     ManufacturersComponent,

@@ -1,3 +1,11 @@
+::ng-deep body {
+  background: #F2F2F2;
+}
+
+.main-wrapper {
+  margin: 15px;
+}
+
 table {
   width: 100%;
   table-layout: fixed;
@@ -7,17 +15,12 @@ table {
   flex: 1 1 auto;
 }
 
+.searchbar {
+  width: 30vw;
+}
+
 .mat-form-field .searchbar {
   min-width: 50%;
-}
-
-th.mat-sort-header-sorted {
-  color: black;
-}
-
-th.mat-header-cell {
-  border-bottom: 2px solid black;
-  border-top: 2px solid black;
 }
 
 .mat-row:nth-child(2n),
@@ -47,48 +50,188 @@ th.mat-header-cell {
   background-color: #B3BCEA;
 }
 
-@keyframes spinner {
-  to {
-    transform: rotate(360deg);
+@media screen and (min-width: 850px) {
+
+  th.mat-header-cell {
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+  }
+
+  @keyframes spinner {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid #FFFFFF;
+    border-top-color: #000000;
+    animation: spinner .8s linear infinite;
+  }
+
+  .overlay {
+    position: absolute;
+    z-index: 1002;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 100%;
+    height: 100%;
+  }
+
+  .mat-column-edit-button {
+    width: 10%;
+  }
+  
+  .mat-column-delete-button {
+    width: 7%;
+  }
+
+  .mat-column-edit-button button.icon {
+    display: none;
+  }
+
+  .mat-column-delete-button button.icon {
+    display: none;
   }
 }
 
-.spinner:before {
-  content: '';
-  box-sizing: border-box;
-  position: absolute;
-  top: 85%;
-  left: 50%;
-  width: 20px;
-  height: 20px;
-  margin-top: -10px;
-  margin-left: -10px;
-  border-radius: 50%;
-  border: 2px solid #ffffff;
-  border-top-color: #000000;
-  animation: spinner .8s linear infinite;
+
+@media screen and (min-width: 850px) and (max-width: 1320px) {
+  .mat-column-edit-button button.icon {
+    display: contents;
+  }
+
+  .mat-column-edit-button button.text {
+    display: none;
+  }
+
+  .mat-column-delete-button button.icon {
+    display: contents;
+  }
+
+  .mat-column-delete-button button.text {
+    display: none;
+  }
 }
 
-.overlay {
-  position: absolute;
-  z-index: 1002;
-  background-color: rgba(255, 255, 255, 0.5);
-  width: 100%;
-  height: 100%;
-}
 
-.mat-column-edit-button {
-  width: 8%;
-}
+@media screen and (max-width: 850px) {
+  .mat-table .mat-header-row {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
 
-.mat-column-delete-button {
-  width: 5%;
-}
+  .mat-table .mat-header-row th.mat-header-cell {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 1rem 0.5rem;
+    justify-content: space-around;
+  }
 
-.searchbar {
-  width: 30vw;
-}
+  .mat-table .mat-header-row th.mat-header-cell>.mat-header-container {
+    padding-left: 15px;
+  }
 
-.main-wrapper {
-  margin: 15px;
+  .mat-table .mat-header-row th.mat-header-cell:nth-last-of-type(2),
+  .mat-table .mat-header-row th.mat-header-cell:last-of-type {
+    visibility: collapse;
+  }
+
+  .mat-table .mat-row {
+    height: auto;
+  }
+
+  .mat-table .mat-row td.mat-cell:not(.mat-column-postcode ~ td) {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 0.5rem;
+    text-align: right;
+    word-break: break-word;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .mat-table .mat-row td.mat-cell:not(.mat-column-postcode ~ td)>* {
+    grid-column: 2;
+  }
+
+  .mat-table .mat-row td.mat-cell:not(.mat-column-postcode ~ td)::before {
+    content: attr(data-label);
+    text-align: left;
+  }
+
+  .mat-table .mat-row .mat-column-postcode~td {
+    display: flex;
+    justify-content: center;
+    padding: 0 0.5rem;
+  }
+
+  .mat-table .mat-row .mat-column-postcode~td {
+    margin: 0.5rem 0;
+    border-bottom-style: none;
+  }
+
+  .mat-table .mat-row:last-of-type td:last-of-type {
+    border: none;
+  }
+
+  .mat-table .mat-row .mat-column-delete-button {
+    padding-bottom: 10px !important;
+  }
+
+  .mat-table .mat-header-row {
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+  }
+
+  @keyframes spinner {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    border-top-color: #000000;
+    animation: spinner .8s linear infinite;
+  }
+  
+  .overlay {
+    position: absolute;
+    z-index: 1002;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 100%;
+    height: 100%;
+  }
+
+  .mat-column-edit-button button.icon {
+    display: none;
+  }
+
+  .mat-column-delete-button button.icon {
+    display: none;
+  }
 }
