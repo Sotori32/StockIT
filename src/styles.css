@@ -8,3 +8,11 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
+
+.mat-table .mat-row .mat-column-delete-button button.text {
+	background-color: #B0170B;
+}
+
+.mat-table .mat-row .mat-column-delete-button button.icon {
+	color: #B0170B;
+}

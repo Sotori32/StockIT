@@ -1,10 +1,10 @@
 <app-header></app-header>
 <div class="main-wrapper" fxLayout="column" fxLayoutAlign="space-evenly stretch">
     <mat-card class="box">
-        <mat-card-title>Felhasználói beállítások</mat-card-title>
+    <h1><mat-card-title>Felhasználói beállítások</mat-card-title></h1>
         <div class="section-wrapper" fxLayout="row" fxLayoutAlign="space-between stretch">
             <div class="content-wrapper-personal">
-            <mat-card-title>Felhasználó adatai</mat-card-title>
+            <h2><mat-card-title>Felhasználó adatai</mat-card-title></h2>
             <mat-card-content class="personal-info-wrapper">
                 <div class="personal-info">Név: {{user?.name ?? ""}}</div>
                 <div class="personal-info">Email cím: {{user?.email ?? ""}}</div>
@@ -12,7 +12,7 @@
             </mat-card-content>
             </div>
             <div class="content-wrapper" fxFlex="50">
-            <mat-card-title>Jelszó megváltoztatása</mat-card-title>
+            <h2><mat-card-title>Jelszó megváltoztatása</mat-card-title></h2>
             <mat-card-content>
                 
                 <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword(changePasswordForm.value)" class="form">
@@ -61,7 +61,7 @@
     <mat-card class="box" *ngIf="this.user?.isOwner">
         <div class="section-wrapper" fxLayout="column" fxLayoutAlign="space-between start">
             <div *ngIf="this.user?.isOwner" class="content-wrapper-users">
-                <mat-card-title>Alkalmazottak kezelése</mat-card-title>
+            <h2><mat-card-title>Alkalmazottak kezelése</mat-card-title></h2>
                 <mat-card-content class="box">
                 <mat-card-content class="add-button" fxLayoutAlign="end center">
                     <button mat-raised-button color="primary" (click)="openInviteUserDialog()">Hozzáadás</button>
@@ -94,7 +94,7 @@
                 </mat-card-content>
             </div>
             <div *ngIf="this.user?.isOwner && this.invites.length > 0" class="content-wrapper-invites">
-                <mat-card-title>Meghívók kezelése</mat-card-title>
+            <h2><mat-card-title>Meghívók kezelése</mat-card-title></h2>
                 <div class="overlay" *ngIf="loading"></div>
                 <mat-card-content>
                 <table mat-table [dataSource]="invites" class="invites-table">
