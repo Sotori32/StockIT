@@ -63,6 +63,6 @@ export class UserService {
   }
 
   deleteInvite(documentId: string) {
-    throw new Error('Method not implemented.');
+    ;this.store.collection(InviteCollectionPath + "/" + documentId).doc().delete;
   }
 }
