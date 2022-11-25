@@ -48,11 +48,11 @@ export class UserService {
   }
 
   public deleteUser(id: string) {
-    return this.auth.user.pipe(filter(user => !!user!), mergeMap((user => {
-      user!.delete()
-      return this.store.collection<UserModel>(UserCollectionPath, ref => ref.where('id', '==', user!.uid)).snapshotChanges()
-    })), map(users => {
-      return users[0]
+    this.organizationService.getUserOrganization().pipe(mergeMap(org => {
+      return org.ref.get()
+    }), mergeMap(org => {
+      const users = org.data()?.users.filter(u => u !== id) ?? []
+      return org.ref.update({users})
     }))
   }
 
