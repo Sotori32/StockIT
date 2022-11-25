@@ -11,6 +11,7 @@
         <mat-icon>settings</mat-icon>
       </button>
       <mat-menu #settings="matMenu">
+        <button mat-menu-item (click)="goToPage('/storage')">Termékek</button>
         <button mat-menu-item (click)="goToPage('/warehouses')">Raktárak</button>
         <button mat-menu-item (click)="goToPage('/categories')">Kategóriák</button>
         <button mat-menu-item (click)="goToPage('/manufacturers')">Gyártók</button>

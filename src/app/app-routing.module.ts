@@ -11,13 +11,13 @@ import { UserSettingsComponent } from './components/user-settings/user-settings.
 
 const routes: Routes = [
   { path: '',   redirectTo: '/storage', pathMatch: 'full' },
-  { path: 'storage', title: 'Irányítópult | StockIT', component: StorageComponent, canActivate: [AuthGuard]},
+  { path: 'storage', title: 'Termékek | StockIT', component: StorageComponent, canActivate: [AuthGuard]},
   { path: 'login', title: 'Bejelentkezés | StockIT', component: LoginComponent },
   { path: 'signup', title: 'Regisztráció | StockIT', component: SignupComponent },
   { path: 'warehouses', title: 'Raktárak | StockIT', component: WarehousesComponent, canActivate: [AuthGuard]},
   { path: 'categories', title: 'Kategóriák | StockIT', component: CategoriesComponent, canActivate: [AuthGuard]},
   { path: 'manufacturers', title: 'Gyártók | StockIT', component: ManufacturersComponent, canActivate: [AuthGuard]},
-  {path:'user-settings', title: 'Felhasználói Beállítások | StockIT', component: UserSettingsComponent, canActivate: [AuthGuard]}
+  {path:'user-settings', title: 'Felhasználói beállítások | StockIT', component: UserSettingsComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
