@@ -63,6 +63,6 @@ export class UserService {
   }
 
   deleteInvite(documentId: string) {
-    ;this.store.collection(InviteCollectionPath + "/" + documentId).doc().delete;
+    this.store.doc(InviteCollectionPath + "/" + documentId).delete();
   }
 }
