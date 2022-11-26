@@ -47,13 +47,14 @@ export class UserService {
     }))
   }
 
-  public deleteUser(id: string) {
-    this.organizationService.getUserOrganization().pipe(mergeMap(org => {
-      return org.ref.get()
-    }), mergeMap(org => {
-      const users = org.data()?.users.filter(u => u !== id) ?? []
-      return org.ref.update({users})
-    }))
+  public deleteUser(documentId: string) {
+    combineLatest([this.store.doc<UserModel>(UserCollectionPath + "/" + documentId).get(), this.organizationService.getUserOrganization()])
+      .subscribe(
+        ([userDoc, org]) => {
+          const users = org.data().users.filter(u => u !== userDoc.data()?.id) ?? []
+          return org.ref.update({users})
+        }
+      )
   }
 
   createInvite(name: string, email: string, userCanRead: DocumentReference<WarehouseModel>[], userCanWrite: DocumentReference<WarehouseModel>[]) {
